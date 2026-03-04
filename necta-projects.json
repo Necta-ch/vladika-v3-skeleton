@@ -1,0 +1,35 @@
+{
+  "projects": [
+    {
+      "name": "INSPIRA FM GmbH",
+      "repo": "Necta-ch/inspira-fm",
+      "description": "Facility Management for B2B and large enterprises",
+      "client": {
+        "company": "INSPIRA FM GmbH",
+        "contact": "Miladin Mitrovic",
+        "email": "info@msfm.ch"
+      },
+      "requirements": {
+        "rebranding": true,
+        "multilingual": true,
+        "contactForm": true,
+        "photoVideo": true,
+        "copywriting": true,
+        "platform": "Wix to new platform"
+      },
+      "tone": "Elegant/Premium",
+      "inspiration": "Nectra (avoid kitschig/cheesy)",
+      "painPoints": [
+        "Missed deadlines",
+        "Unsatisfactory work",
+        "Long reaction times"
+      ],
+      "launchDate": "2026-05-01",
+      "budget": "< 5k CHF",
+      "status": "bootstrap",
+      "createdAt": "2026-03-02",
+      "cloudflarePages": "https://inspira-fm.pages.dev",
+      "cloudflareSetup": "manual - requires dashboard connection"
+    }
+  ]
+}
