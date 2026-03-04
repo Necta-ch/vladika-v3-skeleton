@@ -1,0 +1,19 @@
+{
+  "nav": {
+    "home": "Početna",
+    "news": "Vesti",
+    "bishop": "Episkop",
+    "liturgy": "Raspored bogosluženja",
+    "contact": "Kontakt"
+  },
+  "hero": {
+    "title": "Eparhija za Austriju, Švajcarsku i Italiju",
+    "subtitle": "Dobrodošli na zvanični sajt eparhije Vladike Andreja"
+  },
+  "sections": {
+    "news": "Najnovije vesti",
+    "bishop": "O Vladiki Andreju",
+    "liturgy": "Liturhijski kalendar",
+    "contact": "Pošaljite nam poruku"
+  }
+}

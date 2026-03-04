@@ -1,0 +1,19 @@
+{
+  "nav": {
+    "home": "Home",
+    "news": "Notizie",
+    "bishop": "Vescovo",
+    "liturgy": "Liturgia",
+    "contact": "Contatto"
+  },
+  "hero": {
+    "title": "Eparchia per l'Austria, la Svizzera e l'Italia",
+    "subtitle": "Benvenuti sul sito ufficiale dell'eparchia del Vescovo Andrej"
+  },
+  "sections": {
+    "news": "Ultime notizie",
+    "bishop": "Su Vladika Andrej",
+    "liturgy": "Calendario liturgico",
+    "contact": "Inviaci un messaggio"
+  }
+}

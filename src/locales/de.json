@@ -1,0 +1,19 @@
+{
+  "nav": {
+    "home": "Startseite",
+    "news": "Aktuelles",
+    "bishop": "Bischof",
+    "liturgy": "Liturgieplan",
+    "contact": "Kontakt"
+  },
+  "hero": {
+    "title": "Eparchie für Österreich, die Schweiz und Italien",
+    "subtitle": "Willkommen auf der offiziellen Seite der Eparchie von Vladika Andrej"
+  },
+  "sections": {
+    "news": "Neueste Nachrichten",
+    "bishop": "Über Vladika Andrej",
+    "liturgy": "Liturgischer Kalender",
+    "contact": "Senden Sie uns eine Nachricht"
+  }
+}
