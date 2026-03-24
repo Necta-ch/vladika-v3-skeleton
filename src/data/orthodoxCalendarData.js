@@ -1,0 +1,466 @@
+/**
+ * Orthodox Serbian Calendar Data
+ * 
+ * Based on the Serbian Orthodox Church calendar (Pravoslavni Kalendar).
+ * Dates are in the New Calendar (Gregorian) format.
+ * The Serbian Church uses the Revised Julian Calendar for fixed feasts
+ * and the Julian Calendar for Pascha and moveable feasts.
+ * 
+ * Each entry: { saint, type, fasting, slava }
+ * - saint: Name(s) in Serbian Cyrillic
+ * - type: 'great' | 'major' | 'regular' | 'fast'
+ * - fasting: 'none' | 'fish' | 'oil' | 'strict' | 'no-fast'
+ * - slava: true if this is a common Serbian family patron saint (Slava) day
+ */
+
+const orthodoxCalendarData = {
+  // JANUARY
+  "01-01": { saint: "Свети Василије Велики, Обрезање Господње", type: "great", fasting: "none" },
+  "01-02": { saint: "Свети Силвестар, папа римски", type: "regular", fasting: "none" },
+  "01-03": { saint: "Свети пророк Малахија", type: "regular", fasting: "none" },
+  "01-04": { saint: "Свети 70 апостола", type: "regular", fasting: "none" },
+  "01-05": { saint: "Свети Теопемпт и Теона", type: "regular", fasting: "none" },
+  "01-06": { saint: "Бадњи дан (Бадње вече)", type: "great", fasting: "strict" },
+  "01-07": { saint: "БОЖИЋ – Рођење Господа Исуса Христа", type: "great", fasting: "no-fast", slava: true },
+  "01-08": { saint: "Сабор Пресвете Богородице", type: "major", fasting: "no-fast" },
+  "01-09": { saint: "Свети првомученик и архиђакон Стефан", type: "major", fasting: "no-fast", slava: true },
+  "01-10": { saint: "Свети Григорије Нишки", type: "regular", fasting: "no-fast" },
+  "01-11": { saint: "Свети Теодосије Велики", type: "regular", fasting: "no-fast" },
+  "01-12": { saint: "Света Татјана", type: "regular", fasting: "no-fast" },
+  "01-13": { saint: "Нова Година по старом календару", type: "regular", fasting: "no-fast" },
+  "01-14": { saint: "Свети Василије Велики (Српска Нова Година)", type: "great", fasting: "no-fast" },
+  "01-15": { saint: "Свети Серафим Саровски", type: "major", fasting: "none" },
+  "01-16": { saint: "Свети апостол Петар (Вериге)", type: "regular", fasting: "none" },
+  "01-17": { saint: "Свети Антоније Велики", type: "regular", fasting: "none" },
+  "01-18": { saint: "Свети Атанасије и Кирил Александријски", type: "regular", fasting: "none" },
+  "01-19": { saint: "Богојављење – Крштење Господње", type: "great", fasting: "no-fast" },
+  "01-20": { saint: "Свети Јован Крститељ", type: "great", fasting: "no-fast", slava: true },
+  "01-21": { saint: "Преподобна мајка Домника", type: "regular", fasting: "none" },
+  "01-22": { saint: "Свети апостол Тимотеј", type: "regular", fasting: "none" },
+  "01-23": { saint: "Свети Климент, еп. анкирски", type: "regular", fasting: "none" },
+  "01-24": { saint: "Преподобна мајка Ксенија", type: "regular", fasting: "none" },
+  "01-25": { saint: "Свети Григорије Богослов", type: "major", fasting: "none" },
+  "01-26": { saint: "Преподобни Ксенофонт", type: "regular", fasting: "none" },
+  "01-27": { saint: "СВЕТИ САВА, архиеп. српски", type: "great", fasting: "none", slava: true },
+  "01-28": { saint: "Преподобни Јефрем Сирин", type: "regular", fasting: "none" },
+  "01-29": { saint: "Пренос моштију Св. Игњатија Богоносца", type: "regular", fasting: "none" },
+  "01-30": { saint: "Свети Три Јерарха", type: "major", fasting: "none" },
+  "01-31": { saint: "Свети Кир и Јован бесребреници", type: "regular", fasting: "none" },
+
+  // FEBRUARY
+  "02-01": { saint: "Преподобни Макарије Велики", type: "regular", fasting: "none" },
+  "02-02": { saint: "Сретење Господње", type: "great", fasting: "none", slava: true },
+  "02-03": { saint: "Свети Симеон Богопримац и прор. Ана", type: "regular", fasting: "none" },
+  "02-04": { saint: "Преподобни Исидор Пелусиот", type: "regular", fasting: "none" },
+  "02-05": { saint: "Света великомученица Агатија", type: "regular", fasting: "none" },
+  "02-06": { saint: "Преподобни Вукол, еп. смирнски", type: "regular", fasting: "none" },
+  "02-07": { saint: "Свети Партеније, еп. лампсакијски", type: "regular", fasting: "none" },
+  "02-08": { saint: "Свети великомученик Теодор Стратилот", type: "regular", fasting: "none" },
+  "02-09": { saint: "Свети мученик Никифор", type: "regular", fasting: "none" },
+  "02-10": { saint: "Свети свештеномученик Харалампије", type: "regular", fasting: "none" },
+  "02-11": { saint: "Свети свештеномученик Власије", type: "regular", fasting: "none" },
+  "02-12": { saint: "Свети Три Јерарха (Тродневна)", type: "regular", fasting: "none" },
+  "02-13": { saint: "Светих Кирило и Методије", type: "major", fasting: "none", slava: true },
+  "02-14": { saint: "Преподобни Авксентије", type: "regular", fasting: "none" },
+  "02-15": { saint: "Свети апостол Онисим", type: "regular", fasting: "none" },
+  "02-16": { saint: "Света мученица Јулијана", type: "regular", fasting: "none" },
+  "02-17": { saint: "Свети великомученик Теодор Тирон", type: "regular", fasting: "none" },
+  "02-18": { saint: "Свети Лав, папа римски", type: "regular", fasting: "none" },
+  "02-19": { saint: "Свети апостол Архип", type: "regular", fasting: "none" },
+  "02-20": { saint: "Преподобни Лав Катански", type: "regular", fasting: "none" },
+  "02-21": { saint: "Преподобни Тимотеј", type: "regular", fasting: "none" },
+  "02-22": { saint: "Свети Атанасије Велики", type: "regular", fasting: "none" },
+  "02-23": { saint: "Свети свештеномученик Поликарп", type: "regular", fasting: "none" },
+  "02-24": { saint: "Прво и Друго обретење главе Св. Јована Крститеља", type: "major", fasting: "none" },
+  "02-25": { saint: "Свети Тарасије, архиеп. цариградски", type: "regular", fasting: "none" },
+  "02-26": { saint: "Свети Порфирије, архиеп. газски", type: "regular", fasting: "none" },
+  "02-27": { saint: "Преподобни Прокопије Декаполит", type: "regular", fasting: "none" },
+  "02-28": { saint: "Преподобни Василије Исповедник", type: "regular", fasting: "none" },
+
+  // MARCH
+  "03-01": { saint: "Преподобна мати Евдокија", type: "regular", fasting: "none" },
+  "03-02": { saint: "Свети свештеномученик Теодот Киринејски", type: "regular", fasting: "none" },
+  "03-03": { saint: "Свети мученици Евтропије, Клеоник и Василиск", type: "regular", fasting: "none" },
+  "03-04": { saint: "Преподобни Герасим Јордански", type: "regular", fasting: "none" },
+  "03-05": { saint: "Свети мученик Конон", type: "regular", fasting: "none" },
+  "03-06": { saint: "Свети 42 мученика из Амореја", type: "regular", fasting: "none" },
+  "03-07": { saint: "Свети свештеномученици Херсонски", type: "regular", fasting: "none" },
+  "03-08": { saint: "Свети Теофилакт Исповедник", type: "regular", fasting: "none" },
+  "03-09": { saint: "Свети 40 мученика Севастијских", type: "major", fasting: "fish" },
+  "03-10": { saint: "Свети мученик Кодрат", type: "regular", fasting: "none" },
+  "03-11": { saint: "Свети Софроније Јерусалимски", type: "regular", fasting: "none" },
+  "03-12": { saint: "Преподобни Теофан Исповедник", type: "regular", fasting: "none" },
+  "03-13": { saint: "Пренос моштију Св. Никифора Цариградског", type: "regular", fasting: "none" },
+  "03-14": { saint: "Преподобни Венедикт Нурсијски", type: "regular", fasting: "none" },
+  "03-15": { saint: "Свети мученик Агапије", type: "regular", fasting: "none" },
+  "03-16": { saint: "Свети апостол Аристовул", type: "regular", fasting: "none" },
+  "03-17": { saint: "Преподобни Алексије, Човек Божји", type: "regular", fasting: "none" },
+  "03-18": { saint: "Свети Кирил Јерусалимски", type: "regular", fasting: "none" },
+  "03-19": { saint: "Свети мученици Хрисант и Дарија", type: "regular", fasting: "none" },
+  "03-20": { saint: "Свети мученици Пажаранске кланице", type: "regular", fasting: "none" },
+  "03-21": { saint: "Преподобни Јаков Исповедник", type: "regular", fasting: "none" },
+  "03-22": { saint: "Свети свештеномученик Василије", type: "regular", fasting: "none" },
+  "03-23": { saint: "Свети преподобномученик Лука", type: "regular", fasting: "none" },
+  "03-24": { saint: "Претпразништво Благовести", type: "regular", fasting: "none" },
+  "03-25": { saint: "БЛАГОВЕСТИ – Благовештење Пресвете Богородице", type: "great", fasting: "fish", slava: true },
+  "03-26": { saint: "Сабор Арханђела Гаврила", type: "major", fasting: "none" },
+  "03-27": { saint: "Света мученица Матрона Солунска", type: "regular", fasting: "none" },
+  "03-28": { saint: "Преподобни Иларион Нови", type: "regular", fasting: "none" },
+  "03-29": { saint: "Преподобни Марко, еп. аретусијски", type: "regular", fasting: "none" },
+  "03-30": { saint: "Преподобни Јован Лествичник", type: "regular", fasting: "none" },
+  "03-31": { saint: "Свети свештеномученик Ипатије", type: "regular", fasting: "none" },
+
+  // APRIL
+  "04-01": { saint: "Преподобна мати Марија Египћанка", type: "regular", fasting: "none" },
+  "04-02": { saint: "Преподобни Тит Чудотворац", type: "regular", fasting: "none" },
+  "04-03": { saint: "Преподобни Никита Исповедник", type: "regular", fasting: "none" },
+  "04-04": { saint: "Преподобни Јосиф Песмар", type: "regular", fasting: "none" },
+  "04-05": { saint: "Свети мученици Клаудије и Теодора", type: "regular", fasting: "none" },
+  "04-06": { saint: "Свети Методије, архиеп. моравски", type: "regular", fasting: "none" },
+  "04-07": { saint: "Преподобни Георгије Исповедник", type: "regular", fasting: "none" },
+  "04-08": { saint: "Свети апостоли Иродион и Агав", type: "regular", fasting: "none" },
+  "04-09": { saint: "Свети мученик Еупсихије", type: "regular", fasting: "none" },
+  "04-10": { saint: "Свети мученици Терентије и Помпије", type: "regular", fasting: "none" },
+  "04-11": { saint: "Свети свештеномученик Антипа", type: "regular", fasting: "none" },
+  "04-12": { saint: "Преподобни Василије Исповедник", type: "regular", fasting: "none" },
+  "04-13": { saint: "Свети свештеномученик Артемон", type: "regular", fasting: "none" },
+  "04-14": { saint: "Свети Мартин, папа римски", type: "regular", fasting: "none" },
+  "04-15": { saint: "Свети апостоли Аристарх, Пуд и Трофим", type: "regular", fasting: "none" },
+  "04-16": { saint: "Света мученица Агапија и Хионија", type: "regular", fasting: "none" },
+  "04-17": { saint: "Свети свештеномученик Симеон", type: "regular", fasting: "none" },
+  "04-18": { saint: "Преподобни Јован, ученик Светог Григорија", type: "regular", fasting: "none" },
+  "04-19": { saint: "Преподобни Јован Древни", type: "regular", fasting: "none" },
+  "04-20": { saint: "Преподобни Теодор Трихина", type: "regular", fasting: "none" },
+  "04-21": { saint: "Свети свештеномученик Јануарије", type: "regular", fasting: "none" },
+  "04-22": { saint: "Преподобни Теодор Сикеот", type: "regular", fasting: "none" },
+  "04-23": { saint: "Свети великомученик Георгије – Ђурђевдан", type: "great", fasting: "none", slava: true },
+  "04-24": { saint: "Свети мученик Сава Стратилат", type: "regular", fasting: "none" },
+  "04-25": { saint: "Свети апостол и јеванђелист Марко", type: "major", fasting: "none", slava: true },
+  "04-26": { saint: "Свети свештеномученик Василије, еп. амасијски", type: "regular", fasting: "none" },
+  "04-27": { saint: "Свети свештеномученик Симеон", type: "regular", fasting: "none" },
+  "04-28": { saint: "Свети апостоли Јасон и Сосипатар", type: "regular", fasting: "none" },
+  "04-29": { saint: "Свети 9 мученика кизичких", type: "regular", fasting: "none" },
+  "04-30": { saint: "Свети апостол Јаков Зеведејев", type: "regular", fasting: "none" },
+
+  // MAY
+  "05-01": { saint: "Свети пророк Јеремија", type: "regular", fasting: "none" },
+  "05-02": { saint: "Свети Атанасије Велики", type: "regular", fasting: "none" },
+  "05-03": { saint: "Свети Тимотеј и Мавра", type: "regular", fasting: "none" },
+  "05-04": { saint: "Света мученица Пелагија", type: "regular", fasting: "none" },
+  "05-05": { saint: "Света мученица Ирина", type: "regular", fasting: "none" },
+  "05-06": { saint: "Свети праведни Јов Многострадални", type: "major", fasting: "none", slava: true },
+  "05-07": { saint: "Појављење знака Часног Крста", type: "regular", fasting: "none" },
+  "05-08": { saint: "Свети апостол и јеванђелист Марко", type: "regular", fasting: "none" },
+  "05-09": { saint: "Пренос моштију Св. Николе у Бари", type: "major", fasting: "none" },
+  "05-10": { saint: "Свети апостол Симон Зилот", type: "regular", fasting: "none" },
+  "05-11": { saint: "Свети Кирил и Методије, учитељи Словена", type: "major", fasting: "none" },
+  "05-12": { saint: "Свети Епифаније Кипарски", type: "regular", fasting: "none" },
+  "05-13": { saint: "Света мученица Гликерија", type: "regular", fasting: "none" },
+  "05-14": { saint: "Свети мученик Исидор", type: "regular", fasting: "none" },
+  "05-15": { saint: "Преподобни Пахомије Велики", type: "regular", fasting: "none" },
+  "05-16": { saint: "Преподобни Теодор Освештени", type: "regular", fasting: "none" },
+  "05-17": { saint: "Свети апостол Андроник", type: "regular", fasting: "none" },
+  "05-18": { saint: "Свети мученици Петар и Дионисије", type: "regular", fasting: "none" },
+  "05-19": { saint: "Свети свештеномученик Патрикије", type: "regular", fasting: "none" },
+  "05-20": { saint: "Свети мученик Тлалелеј", type: "regular", fasting: "none" },
+  "05-21": { saint: "Свети цар Константин и царица Јелена", type: "major", fasting: "none", slava: true },
+  "05-22": { saint: "Свети мученик Василиск", type: "regular", fasting: "none" },
+  "05-23": { saint: "Преподобни Михаил Исповедник", type: "regular", fasting: "none" },
+  "05-24": { saint: "Преподобни Симеон Столпник", type: "regular", fasting: "none" },
+  "05-25": { saint: "Треће обретење главе Св. Јована Крститеља", type: "major", fasting: "none" },
+  "05-26": { saint: "Свети апостол Карп", type: "regular", fasting: "none" },
+  "05-27": { saint: "Свети свештеномученик Терапонт", type: "regular", fasting: "none" },
+  "05-28": { saint: "Преподобни Никита, еп. халкидонски", type: "regular", fasting: "none" },
+  "05-29": { saint: "Преподобна мати Теодосија", type: "regular", fasting: "none" },
+  "05-30": { saint: "Преподобни Исакије Далматски", type: "regular", fasting: "none" },
+  "05-31": { saint: "Свети апостол Ерма", type: "regular", fasting: "none" },
+
+  // JUNE
+  "06-01": { saint: "Свети мученик Јустин Философ", type: "regular", fasting: "none" },
+  "06-02": { saint: "Свети великомученик Никифор", type: "regular", fasting: "none" },
+  "06-03": { saint: "Свети мученик Лукилијан", type: "regular", fasting: "none" },
+  "06-04": { saint: "Свети Митрофан, патријарх цариградски", type: "regular", fasting: "none" },
+  "06-05": { saint: "Свети свештеномученик Доротеј", type: "regular", fasting: "none" },
+  "06-06": { saint: "Преподобни Висарион и Иларион Нови", type: "regular", fasting: "none" },
+  "06-07": { saint: "Свети свештеномученик Теодот Анкирски", type: "regular", fasting: "none" },
+  "06-08": { saint: "Пренос моштију Св. великомученика Теодора Стратилата", type: "regular", fasting: "none" },
+  "06-09": { saint: "Свети Кирил Александријски", type: "regular", fasting: "none" },
+  "06-10": { saint: "Свети свештеномученик Тимотеј", type: "regular", fasting: "none" },
+  "06-11": { saint: "Свети апостоли Вартоломеј и Варнава", type: "major", fasting: "none" },
+  "06-12": { saint: "Преподобни Онуфрије Велики", type: "regular", fasting: "none" },
+  "06-13": { saint: "Света мученица Акилина", type: "regular", fasting: "none" },
+  "06-14": { saint: "Свети пророк Јелисеј", type: "regular", fasting: "none" },
+  "06-15": { saint: "Свети пророк Амос", type: "regular", fasting: "none" },
+  "06-16": { saint: "Свети Тихон Амфунтски", type: "regular", fasting: "none" },
+  "06-17": { saint: "Свети мученици Мануил, Савел и Исмаил", type: "regular", fasting: "none" },
+  "06-18": { saint: "Свети мученик Леонтије", type: "regular", fasting: "none" },
+  "06-19": { saint: "Свети апостол Јуда", type: "regular", fasting: "none" },
+  "06-20": { saint: "Свети свештеномученик Методије Патарски", type: "regular", fasting: "none" },
+  "06-21": { saint: "Свети великомученик Теодор Стратилат", type: "regular", fasting: "none" },
+  "06-22": { saint: "Свети свештеномученик Јевсевије", type: "regular", fasting: "none" },
+  "06-23": { saint: "Света мученица Агрипина", type: "regular", fasting: "none" },
+  "06-24": { saint: "Рођење Светог Јована Крститеља (Ивандан)", type: "great", fasting: "no-fast", slava: true },
+  "06-25": { saint: "Преподобна мати Февронија", type: "regular", fasting: "none" },
+  "06-26": { saint: "Преподобни Давид Солунски", type: "regular", fasting: "none" },
+  "06-27": { saint: "Преподобни Сампсон Странопримац", type: "regular", fasting: "none" },
+  "06-28": { saint: "Свети Видовдан – Косовска битка 1389", type: "great", fasting: "none", slava: true },
+  "06-29": { saint: "Свети апостоли Петар и Павле", type: "great", fasting: "no-fast", slava: true },
+  "06-30": { saint: "Сабор Светих Дванаест Апостола", type: "major", fasting: "none" },
+
+  // JULY
+  "07-01": { saint: "Свети бесребреници Козма и Дамјан", type: "major", fasting: "none", slava: true },
+  "07-02": { saint: "Положење ризе Пресвете Богородице", type: "regular", fasting: "none" },
+  "07-03": { saint: "Свети мученик Јакинт", type: "regular", fasting: "none" },
+  "07-04": { saint: "Свети Андреј, архиеп. критски", type: "regular", fasting: "none" },
+  "07-05": { saint: "Преподобни Атанасије Атонски", type: "regular", fasting: "none" },
+  "07-06": { saint: "Преподобни Сисоје Велики", type: "regular", fasting: "none" },
+  "07-07": { saint: "Рођење Светог Јована Крститеља (стари)", type: "regular", fasting: "none" },
+  "07-08": { saint: "Свети великомученик Прокопије", type: "regular", fasting: "none" },
+  "07-09": { saint: "Свети свештеномученик Панкратије", type: "regular", fasting: "none" },
+  "07-10": { saint: "Положење ризе Господње", type: "regular", fasting: "none" },
+  "07-11": { saint: "Света Великомученица Јефимија", type: "regular", fasting: "none" },
+  "07-12": { saint: "ПЕТРОВДАН - Свети апостоли Петар и Павле (стари)", type: "great", fasting: "no-fast", slava: true },
+  "07-13": { saint: "Сабор 12 апостола", type: "major", fasting: "none" },
+  "07-14": { saint: "Свети бесребреници Козма и Дамјан", type: "regular", fasting: "none" },
+  "07-15": { saint: "Положење ризе Пресвете Богородице", type: "regular", fasting: "none" },
+  "07-16": { saint: "Свети мученик Јакинт", type: "regular", fasting: "none" },
+  "07-17": { saint: "Свети Андреј Критски", type: "regular", fasting: "none" },
+  "07-18": { saint: "Преподобни Атанасије Атонски", type: "regular", fasting: "none" },
+  "07-19": { saint: "Преподобни Сисоје Велики", type: "regular", fasting: "none" },
+  "07-20": { saint: "ИЛИНДАН – Свети пророк Илија", type: "great", fasting: "none", slava: true },
+  "07-21": { saint: "Свети Симеон и Јован", type: "regular", fasting: "none" },
+  "07-22": { saint: "Света Марија Магдалина", type: "major", fasting: "none" },
+  "07-23": { saint: "Свети мученици Трофим и Теофил", type: "regular", fasting: "none" },
+  "07-24": { saint: "Света великомученица Христина", type: "regular", fasting: "none" },
+  "07-25": { saint: "Успење Свете Ане", type: "regular", fasting: "none" },
+  "07-26": { saint: "Свети свештеномученик Ермолај", type: "regular", fasting: "none" },
+  "07-27": { saint: "Свети великомученик Пантелејмон", type: "major", fasting: "none", slava: true },
+  "07-28": { saint: "Свети апостоли Прохор, Никанор, Тимон и Пармен", type: "regular", fasting: "none" },
+  "07-29": { saint: "Свети мученик Калиник", type: "regular", fasting: "none" },
+  "07-30": { saint: "Свети апостоли Сила и Силван", type: "regular", fasting: "none" },
+  "07-31": { saint: "Свети Евдоким", type: "regular", fasting: "none" },
+
+  // AUGUST
+  "08-01": { saint: "Изношење Часног Крста (Макавеји)", type: "major", fasting: "oil" },
+  "08-02": { saint: "Свети пророк Илија (стари)", type: "regular", fasting: "oil" },
+  "08-03": { saint: "Преподобни Исакије и Далмат", type: "regular", fasting: "oil" },
+  "08-04": { saint: "Света мученица Марија Магдалина (стари)", type: "regular", fasting: "oil" },
+  "08-05": { saint: "Свети мученик Евсигније", type: "regular", fasting: "oil" },
+  "08-06": { saint: "ПРЕОБРАЖЕЊЕ Господње", type: "great", fasting: "fish" },
+  "08-07": { saint: "Преподобномученик Дометије", type: "regular", fasting: "oil" },
+  "08-08": { saint: "Свети Емилијан Исповедник", type: "regular", fasting: "oil" },
+  "08-09": { saint: "Свети апостол Матија", type: "regular", fasting: "oil" },
+  "08-10": { saint: "Свети мученик Лаврентије", type: "regular", fasting: "oil" },
+  "08-11": { saint: "Свети мученик Евпле", type: "regular", fasting: "oil" },
+  "08-12": { saint: "Свети мученици Фотије и Аникита", type: "regular", fasting: "oil" },
+  "08-13": { saint: "Пренос моштију преп. Максима Исповедника", type: "regular", fasting: "oil" },
+  "08-14": { saint: "Претпразништво Успења", type: "regular", fasting: "oil" },
+  "08-15": { saint: "ВЕЛИКА ГОСПОЈИНА – Успење Пресвете Богородице", type: "great", fasting: "no-fast", slava: true },
+  "08-16": { saint: "Пренос Нерукотворног образа Господњег", type: "major", fasting: "none" },
+  "08-17": { saint: "Свети мученик Мирон", type: "regular", fasting: "none" },
+  "08-18": { saint: "Свети мученици Флор и Лавр", type: "regular", fasting: "none" },
+  "08-19": { saint: "Свети мученик Андреј Стратилат", type: "regular", fasting: "none" },
+  "08-20": { saint: "Свети пророк Самуило", type: "regular", fasting: "none" },
+  "08-21": { saint: "Свети апостол Тадеј", type: "regular", fasting: "none" },
+  "08-22": { saint: "Свети мученик Аготоник", type: "regular", fasting: "none" },
+  "08-23": { saint: "Свети мученик Луп", type: "regular", fasting: "none" },
+  "08-24": { saint: "Свети свештеномученик Јевтихије", type: "regular", fasting: "none" },
+  "08-25": { saint: "Свети апостол Вартоломеј (стари)", type: "regular", fasting: "none" },
+  "08-26": { saint: "Свети мученици Адријан и Наталија", type: "regular", fasting: "none" },
+  "08-27": { saint: "Преподобни Пимен Велики", type: "regular", fasting: "none" },
+  "08-28": { saint: "ВЕЛИКА ГОСПОЈИНА (стари - Успење Богородице)", type: "great", fasting: "no-fast", slava: true },
+  "08-29": { saint: "Усековање главе Св. Јована Крститеља", type: "great", fasting: "strict" },
+  "08-30": { saint: "Свети Александар, Јован и Павле, патријарси цариградски", type: "regular", fasting: "none" },
+  "08-31": { saint: "Положење појаса Пресвете Богородице", type: "regular", fasting: "none" },
+
+  // SEPTEMBER
+  "09-01": { saint: "Свети Симеон Столпник", type: "regular", fasting: "none" },
+  "09-02": { saint: "Свети мученик Мамант", type: "regular", fasting: "none" },
+  "09-03": { saint: "Свети свештеномученик Антим", type: "regular", fasting: "none" },
+  "09-04": { saint: "Свети свештеномученик Вавила", type: "regular", fasting: "none" },
+  "09-05": { saint: "Свети пророк Захарија и праведна Јелисавета", type: "regular", fasting: "none" },
+  "09-06": { saint: "Чудо Арханђела Михаила у Хонама", type: "regular", fasting: "none" },
+  "09-07": { saint: "Претпразништво Рођења Богородице", type: "regular", fasting: "none" },
+  "09-08": { saint: "МАЛА ГОСПОЈИНА – Рођење Пресвете Богородице", type: "great", fasting: "no-fast", slava: true },
+  "09-09": { saint: "Свети Јоаким и Ана, родитељи Богородице", type: "regular", fasting: "none" },
+  "09-10": { saint: "Света мученица Минодора", type: "regular", fasting: "none" },
+  "09-11": { saint: "Преподобна Теодора Александријска", type: "regular", fasting: "none" },
+  "09-12": { saint: "Свети свештеномученик Автоном", type: "regular", fasting: "none" },
+  "09-13": { saint: "Обновљење храма Васкрсења Христовог", type: "regular", fasting: "none" },
+  "09-14": { saint: "Воздвижење Часног Крста", type: "great", fasting: "strict" },
+  "09-15": { saint: "Свети великомученик Никита", type: "major", fasting: "none", slava: true },
+  "09-16": { saint: "Света великомученица Јефимија", type: "regular", fasting: "none" },
+  "09-17": { saint: "Свете мученице Вера, Нада и Љубав и мајка им Софија", type: "regular", fasting: "none" },
+  "09-18": { saint: "Преподобни Евмениј", type: "regular", fasting: "none" },
+  "09-19": { saint: "Свети мученици Трофим, Саватије и Доримедонт", type: "regular", fasting: "none" },
+  "09-20": { saint: "Свети великомученик Јевстатије", type: "regular", fasting: "none" },
+  "09-21": { saint: "Свети апостол Кодрат", type: "regular", fasting: "none" },
+  "09-22": { saint: "Свети свештеномученик Фока", type: "regular", fasting: "none" },
+  "09-23": { saint: "Зачеће Светог Јована Крститеља", type: "major", fasting: "none" },
+  "09-24": { saint: "Света првомученица Текла", type: "regular", fasting: "none" },
+  "09-25": { saint: "Преподобни Сергије Радоњешки", type: "regular", fasting: "none" },
+  "09-26": { saint: "Свети апостол и јеванђелист Јован Богослов", type: "major", fasting: "none", slava: true },
+  "09-27": { saint: "Свети мученик Калистрат", type: "regular", fasting: "none" },
+  "09-28": { saint: "Преподобни Харитон Исповедник", type: "regular", fasting: "none" },
+  "09-29": { saint: "Преподобни Кирјак Отшелник", type: "regular", fasting: "none" },
+  "09-30": { saint: "Свети свештеномученик Григорије", type: "regular", fasting: "none" },
+
+  // OCTOBER
+  "10-01": { saint: "Покров Пресвете Богородице", type: "major", fasting: "none", slava: true },
+  "10-02": { saint: "Свети свештеномученик Кипријан и мученица Јустина", type: "regular", fasting: "none" },
+  "10-03": { saint: "Свети свештеномученик Дионисије Ареопагит", type: "regular", fasting: "none" },
+  "10-04": { saint: "Свети Јеротеј, еп. атински", type: "regular", fasting: "none" },
+  "10-05": { saint: "Света мученица Харитина", type: "regular", fasting: "none" },
+  "10-06": { saint: "Свети апостол Тома", type: "major", fasting: "none", slava: true },
+  "10-07": { saint: "Свети мученици Сергије и Вакх", type: "regular", fasting: "none" },
+  "10-08": { saint: "Преподобна мати Пелагија", type: "regular", fasting: "none" },
+  "10-09": { saint: "Свети апостол Јаков Алфејев", type: "regular", fasting: "none" },
+  "10-10": { saint: "Свети мученици Евлампије и Евлампија", type: "regular", fasting: "none" },
+  "10-11": { saint: "Свети апостол Филип", type: "regular", fasting: "none" },
+  "10-12": { saint: "Свети мученици Пров, Тарах и Андроник", type: "regular", fasting: "none" },
+  "10-13": { saint: "Свети мученици Карп и Папила", type: "regular", fasting: "none" },
+  "10-14": { saint: "ПЕТКА - Света Параскева", type: "great", fasting: "none", slava: true },
+  "10-15": { saint: "Преподобни Евтимије Нови", type: "regular", fasting: "none" },
+  "10-16": { saint: "Свети мученик Лонгин Сотник", type: "regular", fasting: "none" },
+  "10-17": { saint: "Свети пророк Осија", type: "regular", fasting: "none" },
+  "10-18": { saint: "Свети апостол и јеванђелист Лука", type: "major", fasting: "none", slava: true },
+  "10-19": { saint: "Свети пророк Јоило", type: "regular", fasting: "none" },
+  "10-20": { saint: "Свети великомученик Артемије", type: "regular", fasting: "none" },
+  "10-21": { saint: "Преподобни Иларион Велики", type: "regular", fasting: "none" },
+  "10-22": { saint: "Свети Аверкије, еп. јерапољски", type: "regular", fasting: "none" },
+  "10-23": { saint: "Свети апостол Јаков, брат Господњи", type: "regular", fasting: "none" },
+  "10-24": { saint: "Свети мученик Арета", type: "regular", fasting: "none" },
+  "10-25": { saint: "Свети мученици Маркијан и Мартирије", type: "regular", fasting: "none" },
+  "10-26": { saint: "Свети великомученик Димитрије – Митровдан", type: "great", fasting: "none", slava: true },
+  "10-27": { saint: "Свети мученик Нестор", type: "regular", fasting: "none" },
+  "10-28": { saint: "Света мученица Параскева", type: "regular", fasting: "none" },
+  "10-29": { saint: "Преподобна Анастасија Римска", type: "regular", fasting: "none" },
+  "10-30": { saint: "Свети пророк Авдија", type: "regular", fasting: "none" },
+  "10-31": { saint: "Свети апостол и јеванђелист Лука (стари)", type: "regular", fasting: "none" },
+
+  // NOVEMBER
+  "11-01": { saint: "Свети бесребреници Козма и Дамјан", type: "major", fasting: "none", slava: true },
+  "11-02": { saint: "Свети мученици Акиндин и Пигасије", type: "regular", fasting: "none" },
+  "11-03": { saint: "Свети мученици Акепсим, Јосиф и Аитала", type: "regular", fasting: "none" },
+  "11-04": { saint: "Преподобни Јоаникије Велики", type: "regular", fasting: "none" },
+  "11-05": { saint: "Свети мученици Галактион и Јепистимија", type: "regular", fasting: "none" },
+  "11-06": { saint: "Свети Павле Исповедник, патријарх цариградски", type: "regular", fasting: "none" },
+  "11-07": { saint: "Свети 33 мученика мелитинска", type: "regular", fasting: "none" },
+  "11-08": { saint: "АРАНЂЕЛОВДАН – Сабор Арханђела Михаила", type: "great", fasting: "none", slava: true },
+  "11-09": { saint: "Свети мученици Онисифор и Порфирије", type: "regular", fasting: "none" },
+  "11-10": { saint: "Свети апостоли Олимпа и Родион", type: "regular", fasting: "none" },
+  "11-11": { saint: "Свети великомученик Мина", type: "regular", fasting: "none" },
+  "11-12": { saint: "Свети Јован Милостиви", type: "regular", fasting: "none" },
+  "11-13": { saint: "Свети Јован Златоусти", type: "major", fasting: "none", slava: true },
+  "11-14": { saint: "Свети апостол Филип", type: "major", fasting: "none" },
+  "11-15": { saint: "Свети мученици Гурија, Самон и Авив", type: "regular", fasting: "none" },
+  "11-16": { saint: "Свети апостол и јеванђелист Матеј", type: "major", fasting: "none", slava: true },
+  "11-17": { saint: "Свети Григорије Чудотворац", type: "regular", fasting: "none" },
+  "11-18": { saint: "Свети мученици Платон и Роман", type: "regular", fasting: "none" },
+  "11-19": { saint: "Свети пророк Авдија", type: "regular", fasting: "none" },
+  "11-20": { saint: "Претпразништво Ваведења", type: "regular", fasting: "none" },
+  "11-21": { saint: "ВАВЕДЕЊЕ – Ваведење Пресвете Богородице", type: "great", fasting: "fish", slava: true },
+  "11-22": { saint: "Свети апостоли Филимон и Архип", type: "regular", fasting: "none" },
+  "11-23": { saint: "Свети Амфилохије, еп. иконијски", type: "regular", fasting: "none" },
+  "11-24": { saint: "Света великомученица Катарина", type: "major", fasting: "none" },
+  "11-25": { saint: "Свети свештеномученик Климент Римски", type: "regular", fasting: "none" },
+  "11-26": { saint: "Преподобни Аликије Столпник", type: "regular", fasting: "none" },
+  "11-27": { saint: "Свети великомученик Јаков Персијанац", type: "regular", fasting: "none" },
+  "11-28": { saint: "Преподобномученик Стефан Нови", type: "regular", fasting: "none" },
+  "11-29": { saint: "Свети мученик Парамон", type: "regular", fasting: "none" },
+  "11-30": { saint: "Свети апостол Андреј Првозвани", type: "great", fasting: "none", slava: true },
+
+  // DECEMBER
+  "12-01": { saint: "Свети пророк Наум", type: "regular", fasting: "oil" },
+  "12-02": { saint: "Свети пророк Авакум", type: "regular", fasting: "oil" },
+  "12-03": { saint: "Свети пророк Софоније", type: "regular", fasting: "oil" },
+  "12-04": { saint: "Ваведење Пресвете Богородице (старо)", type: "major", fasting: "fish" },
+  "12-05": { saint: "Преподобни Сава Освештени", type: "regular", fasting: "oil" },
+  "12-06": { saint: "Свети Николај Чудотворац (нови)", type: "major", fasting: "fish" },
+  "12-07": { saint: "Свети Амвросије Медиолански", type: "regular", fasting: "oil" },
+  "12-08": { saint: "Преподобни Патапије", type: "regular", fasting: "oil" },
+  "12-09": { saint: "Зачеће Пресвете Богородице", type: "major", fasting: "fish" },
+  "12-10": { saint: "Свети мученици Мина, Ермоген и Евграф", type: "regular", fasting: "oil" },
+  "12-11": { saint: "Преподобни Данило Столпник", type: "regular", fasting: "oil" },
+  "12-12": { saint: "Преподобни Спиридон Чудотворац", type: "regular", fasting: "oil" },
+  "12-13": { saint: "Свети мученици Евстратије, Аукентије и Евденије", type: "regular", fasting: "oil" },
+  "12-14": { saint: "Свети мученици Тирс и Левкије", type: "regular", fasting: "oil" },
+  "12-15": { saint: "Свети свештеномученик Елевтерије", type: "regular", fasting: "oil" },
+  "12-16": { saint: "Свети пророк Агеј", type: "regular", fasting: "oil" },
+  "12-17": { saint: "Свети пророк Данило", type: "regular", fasting: "oil" },
+  "12-18": { saint: "Свети Севастијан и дружина", type: "regular", fasting: "oil" },
+  "12-19": { saint: "СВЕТИ НИКОЛА – Свети Николај Чудотворац", type: "great", fasting: "fish", slava: true },
+  "12-20": { saint: "Свети свештеномученик Игњатије Богоносац", type: "regular", fasting: "oil" },
+  "12-21": { saint: "Свети мученик Јулијана", type: "regular", fasting: "oil" },
+  "12-22": { saint: "Света великомученица Анастасија", type: "regular", fasting: "oil" },
+  "12-23": { saint: "Свети 10 мученика критских", type: "regular", fasting: "oil" },
+  "12-24": { saint: "Претпразништво Рођења Христовог", type: "regular", fasting: "oil" },
+  "12-25": { saint: "Свети свештеномученик Евгенија", type: "regular", fasting: "oil" },
+  "12-26": { saint: "Свети Јосиф Заручник", type: "regular", fasting: "oil" },
+  "12-27": { saint: "Свети првомученик Стефан (стари)", type: "regular", fasting: "oil" },
+  "12-28": { saint: "Света 20000 мученика никомедијских", type: "regular", fasting: "oil" },
+  "12-29": { saint: "Света 14000 мученике витлејемске", type: "regular", fasting: "oil" },
+  "12-30": { saint: "Света мученица Анисија", type: "regular", fasting: "oil" },
+  "12-31": { saint: "Преподобна Меланија Римљанка", type: "regular", fasting: "oil" },
+};
+
+/**
+ * Get today's saint/feast information.
+ */
+export function getTodaySaint() {
+  const now = new Date();
+  const key = `${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
+  return { date: key, ...orthodoxCalendarData[key] };
+}
+
+/**
+ * Get saint info for a specific date.
+ */
+export function getSaintByDate(month, day) {
+  const key = `${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+  return orthodoxCalendarData[key] || null;
+}
+
+/**
+ * Get all saints/feasts for a given month.
+ */
+export function getMonthSaints(month) {
+  const prefix = String(month).padStart(2, '0');
+  const result = [];
+  for (const [key, value] of Object.entries(orthodoxCalendarData)) {
+    if (key.startsWith(prefix + '-')) {
+      const day = parseInt(key.split('-')[1]);
+      result.push({ day, ...value });
+    }
+  }
+  return result.sort((a, b) => a.day - b.day);
+}
+
+/**
+ * Get the fasting label in Serbian.
+ */
+export function getFastingLabel(fasting) {
+  const labels = {
+    'none': 'Без ограничења',
+    'no-fast': 'Разрешење',
+    'fish': 'Риба дозвољена',
+    'oil': 'Уље дозвољено',
+    'strict': 'Строги пост',
+  };
+  return labels[fasting] || fasting;
+}
+
+/**
+ * Get the type label in Serbian.
+ */
+export function getTypeLabel(type) {
+  const labels = {
+    'great': 'Велики празник',
+    'major': 'Празник',
+    'regular': 'Обичан дан',
+    'fast': 'Постни дан',
+  };
+  return labels[type] || type;
+}
+
+export default orthodoxCalendarData;

@@ -22,6 +22,13 @@ const newsItems = [
 const Home = () => {
   const { t } = useTranslation();
   const [current, setCurrent] = useState(0);
+  const [adminPosts, setAdminPosts] = useState([]);
+
+  // Load admin-created posts from localStorage
+  useEffect(() => {
+    const saved = localStorage.getItem('vladika_posts');
+    if (saved) setAdminPosts(JSON.parse(saved));
+  }, []);
 
   const nextSlide = useCallback(() => {
     setCurrent((prev) => (prev + 1) % heroSlides.length);

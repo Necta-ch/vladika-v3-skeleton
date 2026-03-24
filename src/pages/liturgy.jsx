@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { Calendar, Clock, MapPin, ChevronRight } from "lucide-react";
 import Head from "next/head";
 import Link from "next/link";
+import LiturgyCalendar from "../components/LiturgyCalendar";
 
 const Liturgy = () => {
   const { t } = useTranslation();
@@ -157,6 +158,23 @@ const Liturgy = () => {
             </Link>
           </div>
         </div>
+
+        {/* Calendar View */}
+        <div className="container-custom py-16">
+          <h2 className="text-2xl md:text-3xl font-serif text-gray-900 mb-8 text-center">
+            {t("liturgy.calendar_title", "Календар богослужења")}
+          </h2>
+          <LiturgyCalendar
+            parishes={schedules.flatMap(r => r.parishes.map(p => ({
+              city: p.city,
+              church: p.church,
+              address: p.address,
+              services: p.services,
+            })))}
+          />
+        </div>
+
+        <div className="h-px bg-gray-200 container-custom"></div>
 
         {/* Schedule by Region */}
         <div className="container-custom py-20">
