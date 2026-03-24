@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Head from 'next/head';
 import { motion, AnimatePresence } from 'framer-motion';
-import { MapPin, Phone, Mail, Globe, Users } from 'lucide-react';
+import { MapPin, Phone, Mail, Globe, Users, Clock } from 'lucide-react';
 import { useTranslation } from "react-i18next";
 
 const parishes = [
@@ -12,8 +12,8 @@ const parishes = [
     parish: 'Парохија Светог Луке',
     address: 'Contrada della Misericordia 20, 36100 Vicenza',
     priests: [{ name: 'протојереј Далибор Ђукић', phone: '+39 380 434 07 76', email: 'dalibor_djukic@hotmail.com' }],
-    note: 'Св. Литургија недељом и празником почиње у 09.00 часова',
-    image: '/img/image3.jpeg'
+    liturgyTime: 'Недеља и празници 09:00',
+    image: '/img/image1.jpeg'
   },
   {
     id: 'rim',
@@ -22,7 +22,8 @@ const parishes = [
     parish: 'Мисионарска Парохија Светог Саве у Риму',
     address: 'Chiesa San Filippo Neri all’Esquilino, Via Sforza 16, Roma, Italie',
     priests: [{ name: 'протојереј Роман Фишер', phone: '+43 664 731 83 099', email: 'roman.f58@proton.me' }],
-    image: '/img/image4.jpeg'
+    liturgyTime: 'Недеља 10:00',
+    image: '/img/image2.jpeg'
   },
   {
     id: 'trst',
@@ -35,7 +36,8 @@ const parishes = [
       { name: 'протојереј-ставрофор Рашко Радовић', phone: '+39 340 468 47 38' },
       { name: 'ђакон Миле Марковић', phone: '+39 371 367 1139' }
     ],
-    image: '/img/image5.jpeg'
+    liturgyTime: 'Недеља 10:00',
+    image: '/img/image3.jpeg'
   },
   {
     id: 'udine',
@@ -44,8 +46,9 @@ const parishes = [
     parish: 'Парохија Светог краља Стефана Новог (Бранковића)',
     address: 'Chiesa della Pietà, Piazza Cella, 33100 Udine',
     priests: [{ name: 'јереј др Душан Ђукановић', phone: '+39 342 795 88 64' }],
+    liturgyTime: 'Недеља 10:00',
     note: 'Црква у Тревизу (Chiesa di San Luca) и Порћији.',
-    image: '/img/image6.jpeg'
+    image: '/img/image4.jpeg'
   },
   {
     id: 'milano',
@@ -54,6 +57,7 @@ const parishes = [
     parish: 'Парохија светог краља Стефана Првовенчаног',
     address: 'Carate Brianza, Via Alessandro Volta 2',
     priests: [{ name: 'јереј Ивица Ђулић', phone: '+39 380 654 10 53', email: 'ivicadjulic@yahoo.com' }],
+    liturgyTime: 'Недеља 10:00',
   },
   {
     id: 'malta',
@@ -62,7 +66,8 @@ const parishes = [
     parish: 'Парохија светог апостола Павла и светог Николе',
     address: 'Chapel of Our Lady of Carmel, 432 Triq San Pawl',
     priests: [{ name: 'јереј Ристо Горанчић', phone: '+35 677 005 789' }],
-    image: '/img/image7.jpeg'
+    liturgyTime: 'Недеља 10:00',
+    image: '/img/image5.jpeg'
   },
   {
     id: 'bazel',
@@ -72,6 +77,7 @@ const parishes = [
     address: 'Kirche zu St. Alban, Mühlenberg 5, 4051 Basel',
     website: 'www.spc-basel.ch',
     priests: [{ name: 'протојереј-ставрофор Милутин Николић', phone: '+41 61 272 08 68' }],
+    liturgyTime: 'Недеља 10:00',
     image: '/img/image8.jpeg'
   },
   {
@@ -82,6 +88,7 @@ const parishes = [
     address: 'Aemmenmattstrasse 12, 3123 Belp',
     website: 'www.spcobern.ch',
     priests: [{ name: 'протојереј-ставрофор Станко Марковић', phone: '+41 76 579 10 33' }],
+    liturgyTime: 'Недеља 10:00',
     image: '/img/image9.jpeg'
   },
   {
@@ -95,6 +102,7 @@ const parishes = [
       { name: 'протојереј Богољуб Поповић', phone: '+41 79 793 74 32' },
       { name: 'протојереј-ставрофор Франсоа Меан', other: 'Франкофонска парохија' }
     ],
+    liturgyTime: 'Недеља 10:00',
     image: '/img/image10.jpeg'
   },
   {
@@ -105,6 +113,7 @@ const parishes = [
     address: 'Temple de Chancy, route de Bellegarde 69, 1284 Chancy',
     website: 'www.spczeneva.com',
     priests: [{ name: 'јереј Иван Толић', phone: '+41 76 222 37 31', email: 'parohijazeneva@gmail.com' }],
+    liturgyTime: 'Недеља 10:00',
     image: '/img/image11.tiff'
   },
   {
@@ -114,7 +123,8 @@ const parishes = [
     parish: 'Парохија Сабора Српских Светитеља',
     address: 'Chiesa San Giovanni, via San Giovanni 7, 6500 Bellinzona',
     website: 'www.spc-ticino.ch',
-    priests: [{ name: 'јереј Марко Кнежевић', phone: '+41 76 479 97 89' }]
+    priests: [{ name: 'јереј Марко Кнежевић', phone: '+41 76 479 97 89' }],
+    liturgyTime: 'Недеља 10:00',
   },
   {
     id: 'lucern',
@@ -124,6 +134,7 @@ const parishes = [
     address: 'Dorfstrasse 2, 6035 Perlen',
     website: 'www.spcoluzern.ch',
     priests: [{ name: 'протојереј Драган Станојевић', phone: '+41 76 587 00 11', email: 'otacdragan@spcoluzern.ch' }],
+    liturgyTime: 'Недеља 10:00',
     image: '/img/image12.jpeg'
   },
   {
@@ -139,6 +150,7 @@ const parishes = [
       { name: 'протојереј Александар Ресимић', email: 'o.aleksandar@spc-zh.ch' },
       { name: 'протојереј-ставрофор др Мирослав Симијоновић', email: 'o.miroslav@spc-zh.ch' }
     ],
+    liturgyTime: 'Недеља 09:30',
     image: '/img/image13.jpeg'
   },
   {
@@ -151,7 +163,8 @@ const parishes = [
     priests: [
       { name: 'протојереј Бране Сарић', phone: '+41 79 546 10 83', email: 'o.brane@spc-sg.ch' },
       { name: 'јереј Миладин Вујковић', phone: '+41 79 850 98 86', email: 'o.miladin@spc-sg.ch' }
-    ]
+    ],
+    liturgyTime: 'Недеља 10:00',
   },
   {
     id: 'mels',
@@ -161,6 +174,7 @@ const parishes = [
     address: 'Kapuzinerkloster, Klosterweg 6, 8887 Mels SG',
     website: 'www.spc-gr.ch',
     priests: [{ name: 'јереј Ненад Бркић', phone: '+41 76 580 01 28', email: 'o.nenad@spc-gr.ch' }],
+    liturgyTime: 'Недеља 10:00',
     image: '/img/image14.jpeg'
   }
 ];
@@ -259,6 +273,17 @@ export default function SematizamPage() {
                         </div>
                       )}
                     </div>
+
+                    {/* Service Times */}
+                    {parish.liturgyTime && (
+                      <div className="flex items-center gap-3 bg-orthodox-gold/5 rounded-lg px-4 py-3 border border-orthodox-gold/10">
+                        <Clock className="w-5 h-5 text-orthodox-gold shrink-0" />
+                        <div>
+                          <span className="text-[10px] font-bold uppercase tracking-widest text-orthodox-gold block">{t("directory.service_time", "Св. Литургија")}</span>
+                          <span className="text-sm font-semibold text-gray-900">{parish.liturgyTime}</span>
+                        </div>
+                      </div>
+                    )}
 
                     <div className="mt-auto pt-6 border-t border-gray-100">
                       <div className="text-[10px] font-bold uppercase tracking-widest text-[#6b151b] mb-4 flex items-center gap-2">

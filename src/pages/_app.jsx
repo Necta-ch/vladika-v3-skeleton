@@ -57,7 +57,7 @@ const Footer = () => {
             <ul className="space-y-3 font-sans text-gray-400 text-sm">
               <li><Link href="/" className="hover:text-white transition-colors">{t("footer.link_home", "Почетна")}</Link></li>
               <li><Link href="/bishop" className="hover:text-white transition-colors">{t("footer.link_bishop", "Епископ Андреј")}</Link></li>
-              <li><Link href="/sematizam" className="hover:text-white transition-colors">{t("footer.link_schedule", "Распоред богослужења")}</Link></li>
+              <li><Link href="/liturgy" className="hover:text-white transition-colors">{t("footer.link_schedule", "Распоред богослужења")}</Link></li>
               <li><Link href="/contact" className="hover:text-white transition-colors">{t("footer.link_contact", "Контакт")}</Link></li>
             </ul>
           </div>
@@ -71,7 +71,13 @@ const Footer = () => {
           </div>
         </div>
         <div className="mt-16 pt-8 border-t border-white/10 text-center text-xs text-gray-500 font-sans tracking-widest uppercase">
-          &copy; {new Date().getFullYear()} {t("footer.copyright", "Епархија швајцарска. Сва права задржана.")}
+          <div>&copy; {new Date().getFullYear()} {t("footer.copyright", "Епархија швајцарска. Сва права задржана.")}</div>
+          <div className="mt-3 text-gray-600">
+            Powered by{" "}
+            <a href="https://necta.ch" target="_blank" rel="noopener noreferrer" className="text-orthodox-gold hover:text-white transition-colors font-bold">
+              Necta
+            </a>
+          </div>
         </div>
       </div>
     </footer>

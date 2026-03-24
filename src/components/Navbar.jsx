@@ -39,6 +39,7 @@ const Navbar = () => {
     { href: "/eparhija", label: t("nav.eparchy", "ЕПАРХИЈА") },
     { href: "/history", label: t("nav.history", "ИСТОРИЈА") },
     { href: "/sematizam", label: t("nav.directory", "СВЕ ЦРКВЕ") },
+    { href: "/liturgy", label: t("nav.liturgy", "БОГОСЛУЖЕЊА") },
     { href: "/bishop", label: t("nav.bishop", "ЕПИСКОП") },
     { href: "/contact", label: t("nav.contact", "КОНТАКТ") }
   ];
