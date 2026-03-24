@@ -1,8 +1,8 @@
-import Head from 'next/head'
+import { Html, Head, Main, NextScript } from 'next/document'
 
 export default function Document() {
   return (
-    <html lang="de">
+    <Html lang="de">
       <Head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
@@ -15,8 +15,6 @@ export default function Document() {
         <Main />
         <NextScript />
       </body>
-    </html>
+    </Html>
   )
 }
-
-import { Html, Main, NextScript } from 'next/document'

@@ -1,5 +1,5 @@
 /** @type {import('tailwindcss').Config} */
-module.exports = {
+export default {
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -9,10 +9,11 @@ module.exports = {
     extend: {
       colors: {
         orthodox: {
-          gold: "#D4AF37",
+          gold: "#BB9456",
           crimson: "#8B0000",
           blue: "#003366",
           parchment: "#F5F5DC",
+          brown: "#4C3435",
         },
       },
       fontFamily: {

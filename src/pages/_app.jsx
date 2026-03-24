@@ -5,6 +5,7 @@ import Navbar from "../components/Navbar";
 import { motion, AnimatePresence } from "framer-motion";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import Link from "next/link";
 
 function MyApp({ Component, pageProps }) {
   const { i18n } = useTranslation();
@@ -17,6 +18,8 @@ function MyApp({ Component, pageProps }) {
 
   if (!mounted) return null;
 
+  const isHomepage = router.pathname === "/";
+
   return (
     <div dir={i18n.dir()}>
       <Navbar />
@@ -27,7 +30,7 @@ function MyApp({ Component, pageProps }) {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.5 }}
-          className="pt-20 min-h-screen"
+          className={isHomepage ? "min-h-screen" : "pt-[130px] min-h-screen"}
         >
           <Component {...pageProps} />
         </motion.main>
@@ -40,35 +43,35 @@ function MyApp({ Component, pageProps }) {
 const Footer = () => {
   const { t } = useTranslation();
   return (
-    <footer className="bg-orthodox-blue text-white py-20 border-t-8 border-orthodox-gold">
+    <footer className="bg-orthodox-brown text-white py-20 border-t-4 border-orthodox-gold">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
           <div className="space-y-6">
-            <h3 className="font-serif text-3xl text-orthodox-gold">Eparhija</h3>
-            <p className="text-gray-300 font-sans leading-relaxed">
-              Willkommen bei der Serbisch-Orthodoxen Eparchie für Österreich, die Schweiz und Italien. Wir pflegen den Glauben und die Gemeinschaft.
+            <h3 className="font-serif text-3xl text-orthodox-gold">{t("footer.title", "Епархија швајцарска")}</h3>
+            <p className="text-gray-300 font-sans leading-relaxed text-sm">
+              {t("footer.description", "Званична интернет страница Епархије швајцарске Српске Православне Цркве.")}
             </p>
           </div>
           <div className="space-y-6">
-            <h4 className="font-serif text-xl uppercase tracking-widest text-orthodox-gold">Links</h4>
-            <ul className="space-y-4 font-sans text-gray-400">
-              <li><a href="#" className="hover:text-white transition-colors">Startseite</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Bischof Andrej</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Liturgieplan</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Kontakt</a></li>
+            <h4 className="font-serif text-lg uppercase tracking-widest text-orthodox-gold">{t("footer.links_title", "Навигација")}</h4>
+            <ul className="space-y-3 font-sans text-gray-400 text-sm">
+              <li><Link href="/" className="hover:text-white transition-colors">{t("footer.link_home", "Почетна")}</Link></li>
+              <li><Link href="/bishop" className="hover:text-white transition-colors">{t("footer.link_bishop", "Епископ Андреј")}</Link></li>
+              <li><Link href="/sematizam" className="hover:text-white transition-colors">{t("footer.link_schedule", "Распоред богослужења")}</Link></li>
+              <li><Link href="/contact" className="hover:text-white transition-colors">{t("footer.link_contact", "Контакт")}</Link></li>
             </ul>
           </div>
           <div className="space-y-6">
-            <h4 className="font-serif text-xl uppercase tracking-widest text-orthodox-gold">Kontakt</h4>
-            <div className="text-gray-400 font-sans space-y-2">
-              <p>Schottenfeldgasse 17, 1070 Wien, Österreich</p>
-              <p>Email: eparhija@example.com</p>
-              <p>Tel: +43 1 2345678</p>
+            <h4 className="font-serif text-lg uppercase tracking-widest text-orthodox-gold">{t("footer.contact_title", "Контакт")}</h4>
+            <div className="text-gray-400 font-sans space-y-2 text-sm">
+              <p>{t("footer.address", "Elisabethenstrasse 20, 8004 Zürich, Швајцарска")}</p>
+              <p>Email: <a href="mailto:eparhija@crkva.ch" className="hover:text-white transition-colors">eparhija@crkva.ch</a></p>
+              <p>Tel: <a href="tel:+41442428990" className="hover:text-white transition-colors">+41 44 242 89 90</a></p>
             </div>
           </div>
         </div>
-        <div className="mt-20 pt-8 border-t border-white/10 text-center text-sm text-gray-500 font-sans tracking-widest uppercase">
-          &copy; {new Date().getFullYear()} Eparhija Vladika Andrej. Alle Rechte vorbehalten.
+        <div className="mt-16 pt-8 border-t border-white/10 text-center text-xs text-gray-500 font-sans tracking-widest uppercase">
+          &copy; {new Date().getFullYear()} {t("footer.copyright", "Епархија швајцарска. Сва права задржана.")}
         </div>
       </div>
     </footer>
