@@ -1,6 +1,7 @@
 {
   "nav": {
     "home": "STARTSEITE",
+    "news": "NACHRICHTEN",
     "eparchy": "EPARCHIE",
     "history": "GESCHICHTE",
     "directory": "ALLE KIRCHEN",
@@ -19,12 +20,64 @@
     "welcome": "Willkommen auf der offiziellen Seite der neu gegründeten Eparchie der Schweiz.",
     "read_more": "WEITERLESEN",
     "news_title": "Neuigkeiten der Eparchie",
+    "all_news": "Alle Nachrichten",
     "social_title": "Folgen Sie uns",
     "fb_page": "Offizielle Seite",
     "fb_desc": "Alle Informationen, Gottesdienstankündigungen, Veranstaltungsberichte und Fotogalerien werden regelmäßig auf unserer offiziellen Facebook-Seite veröffentlicht. Klicken Sie hier, um auf dem Laufenden zu bleiben.",
     "fb_link": "Verfolgen Sie die neuesten Nachrichten auf Facebook",
     "bishop_read": "Biografie lesen",
     "bishop_title": "Bischof Andrej"
+  },
+  "news": {
+    "page_title": "Nachrichten",
+    "heading": "Nachrichten der Eparchie",
+    "subheading": "Aktuelles aus dem Leben der Eparchie",
+    "back": "Zurück zu Nachrichten",
+    "gallery": "Fotogalerie",
+    "read_more": "Weiterlesen",
+    "see_on_fb": "Sehen Sie den Originalbeitrag auf Facebook",
+    "more_on_fb": "Für weitere Nachrichten folgen Sie uns auf Facebook"
+  },
+  "calendar": {
+    "title": "Orthodoxer Kirchenkalender",
+    "subtitle": "Heilige und Feiertage",
+    "today": "Heute",
+    "type": "Art",
+    "feast": "Festtag",
+    "great_feast": "Großer Festtag",
+    "fasting": "Fasttag",
+    "slava": "Slava",
+    "slava_desc": "Familienheiliger",
+    "no_info": "Keine Informationen für diesen Tag verfügbar.",
+    "month_list": "Januar,Februar,März,April,Mai,Juni,Juli,August,September,Oktober,November,Dezember"
+  },
+  "admin": {
+    "login_title": "Anmeldung",
+    "login_desc": "Zugang zum Verwaltungsbereich der Eparchie",
+    "login_button": "Anmelden",
+    "password_label": "Passwort",
+    "wrong_password": "Falsches Passwort. Bitte versuchen Sie es erneut.",
+    "dashboard_title": "Verwaltung",
+    "dashboard_desc": "Willkommen im Verwaltungsbereich der Eparchie der Schweiz",
+    "logout": "Abmelden",
+    "tab_posts": "Beiträge",
+    "tab_new": "Neuer Beitrag",
+    "tab_edit": "Bearbeiten",
+    "field_title": "Titel",
+    "field_title_placeholder": "Titel des Beitrags",
+    "field_summary": "Zusammenfassung",
+    "field_summary_placeholder": "Kurze Zusammenfassung...",
+    "field_body": "Inhalt",
+    "field_body_placeholder": "Vollständiger Inhalt des Beitrags...",
+    "field_category": "Kategorie",
+    "field_date": "Datum",
+    "cat_news": "Nachrichten",
+    "cat_event": "Veranstaltung",
+    "cat_announcement": "Ankündigung",
+    "publish": "Veröffentlichen",
+    "update": "Aktualisieren",
+    "cancel": "Abbrechen",
+    "no_posts": "Noch keine Beiträge."
   },
   "eparchy": {
     "title": "Eparchie der Schweiz",
@@ -119,6 +172,7 @@
   "liturgy": {
     "page_title": "Gottesdienstplan",
     "page_subtitle": "Heilige Liturgie und Vesper",
+    "calendar_title": "Liturgischer Kalender",
     "note_label": "Hinweis:",
     "note_text": "Genaue Gottesdienstzeiten finden Sie auf den Webseiten der einzelnen Gemeinden oder kontaktieren Sie den zuständigen Priester.",
     "all_parishes_link": "Alle Gemeinden",
@@ -157,11 +211,13 @@
     "description": "Offizielle Webseite der Eparchie der Schweiz der Serbisch-Orthodoxen Kirche.",
     "links_title": "Navigation",
     "link_home": "Startseite",
+    "link_news": "Nachrichten",
     "link_bishop": "Bischof Andrej",
     "link_schedule": "Liturgieplan",
     "link_contact": "Kontakt",
     "contact_title": "Kontakt",
     "address": "Elisabethenstrasse 20, 8004 Zürich, Schweiz",
-    "copyright": "Eparchie der Schweiz. Alle Rechte vorbehalten."
+    "copyright": "Eparchie der Schweiz. Alle Rechte vorbehalten.",
+    "powered_by": "Powered by"
   }
 }
