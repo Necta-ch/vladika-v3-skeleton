@@ -37,7 +37,7 @@ const parishes = [
       { name: 'ђакон Миле Марковић', phone: '+39 371 367 1139' }
     ],
     liturgyTime: 'Недеља 10:00',
-    image: '/img/image3.jpeg'
+    image: '/img/trieste-spiridone.jpg'
   },
   {
     id: 'udine',
@@ -58,6 +58,7 @@ const parishes = [
     address: 'Carate Brianza, Via Alessandro Volta 2',
     priests: [{ name: 'јереј Ивица Ђулић', phone: '+39 380 654 10 53', email: 'ivicadjulic@yahoo.com' }],
     liturgyTime: 'Недеља 10:00',
+    image: '/img/milano-church.jpg'
   },
   {
     id: 'malta',
@@ -114,7 +115,7 @@ const parishes = [
     website: 'www.spczeneva.com',
     priests: [{ name: 'јереј Иван Толић', phone: '+41 76 222 37 31', email: 'parohijazeneva@gmail.com' }],
     liturgyTime: 'Недеља 10:00',
-    image: '/img/image11.tiff'
+    image: '/img/geneva-temple.jpg'
   },
   {
     id: 'ticino',
@@ -125,6 +126,7 @@ const parishes = [
     website: 'www.spc-ticino.ch',
     priests: [{ name: 'јереј Марко Кнежевић', phone: '+41 76 479 97 89' }],
     liturgyTime: 'Недеља 10:00',
+    image: '/img/bellinzona-church.jpg'
   },
   {
     id: 'lucern',
@@ -165,6 +167,7 @@ const parishes = [
       { name: 'јереј Миладин Вујковић', phone: '+41 79 850 98 86', email: 'o.miladin@spc-sg.ch' }
     ],
     liturgyTime: 'Недеља 10:00',
+    image: '/img/stgallen-church.jpg'
   },
   {
     id: 'mels',
