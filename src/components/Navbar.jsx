@@ -36,6 +36,7 @@ const Navbar = () => {
 
   const navLinks = [
     { href: "/", label: t("nav.home", "ПОЧЕТНА") },
+    { href: "/vesti", label: t("nav.news", "ВЕСТИ") },
     { href: "/eparhija", label: t("nav.eparchy", "ЕПАРХИЈА") },
     { href: "/history", label: t("nav.history", "ИСТОРИЈА") },
     { href: "/sematizam", label: t("nav.directory", "СВЕ ЦРКВЕ") },

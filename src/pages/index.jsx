@@ -1,8 +1,9 @@
 import { useTranslation } from "react-i18next";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronRight, ChevronLeft } from "lucide-react";
+import { ChevronRight, ChevronLeft, Calendar, MapPin } from "lucide-react";
 import Link from "next/link";
 import { useState, useEffect, useCallback } from "react";
+import newsPosts from '../data/newsPosts';
 
 const heroSlides = [
   { image: "/img/hero-interior.png", position: "center" },
@@ -10,25 +11,12 @@ const heroSlides = [
   { image: "/img/hero-exterior.png", position: "center top" },
 ];
 
-// News items with dates (linking to Facebook - since content comes from FB)
-const newsItems = [
-  { id: 1, date: "24/3", year: "2026", image: "/img/image5.jpeg", title: "news_1" },
-  { id: 2, date: "21/3", year: "2026", image: "/img/image13.jpeg", title: "news_2" },
-  { id: 3, date: "18/3", year: "2026", image: "/img/image8.jpeg", title: "news_3" },
-  { id: 4, date: "15/3", year: "2026", image: "/img/image9.jpeg", title: "news_4" },
-  { id: 5, date: "12/3", year: "2026", image: "/img/image12.jpeg", title: "news_5" },
-];
-
 const Home = () => {
   const { t } = useTranslation();
   const [current, setCurrent] = useState(0);
-  const [adminPosts, setAdminPosts] = useState([]);
 
-  // Load admin-created posts from localStorage
-  useEffect(() => {
-    const saved = localStorage.getItem('vladika_posts');
-    if (saved) setAdminPosts(JSON.parse(saved));
-  }, []);
+  // Sort posts by date (newest first) and take the latest 5
+  const latestPosts = [...newsPosts].sort((a, b) => new Date(b.date) - new Date(a.date)).slice(0, 5);
 
   const nextSlide = useCallback(() => {
     setCurrent((prev) => (prev + 1) % heroSlides.length);
@@ -138,41 +126,44 @@ const Home = () => {
             <h2 className="text-3xl md:text-4xl font-serif text-gray-900">
               {t("home.news_title", "Епархијске Вести")}
             </h2>
-            <a 
-              href="https://www.facebook.com/EpiskopAndrejCilerdzic" 
-              target="_blank" 
-              rel="noopener noreferrer"
+            <Link 
+              href="/vesti"
               className="text-orthodox-gold font-sans text-xs tracking-[0.15em] uppercase font-bold hover:text-orthodox-brown transition-colors flex items-center"
             >
-              {t("home.fb_page", "Званична Страница")}
+              {t("home.all_news", "Све Вести")}
               <ChevronRight size={14} className="ml-1" />
-            </a>
+            </Link>
           </div>
 
-          {/* News Grid */}
+          {/* News Grid - uses real posts */}
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 md:gap-4">
-            {newsItems.map((item) => (
-              <a 
-                key={item.id}
-                href="https://www.facebook.com/EpiskopAndrejCilerdzic" 
-                target="_blank" 
-                rel="noopener noreferrer"
+            {latestPosts.map((post) => (
+              <Link 
+                key={post.id}
+                href="/vesti"
                 className="group relative aspect-[3/4] overflow-hidden cursor-pointer"
               >
                 <div 
                   className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
-                  style={{ backgroundImage: `url('${item.image}')` }}
+                  style={{ backgroundImage: `url('${post.images[0]}')` }}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
                 
                 {/* Date Overlay */}
                 <div className="absolute top-4 left-4 z-10">
                   <div className="text-3xl md:text-4xl font-serif font-bold text-white leading-none drop-shadow-lg">
-                    {item.date}
+                    {new Date(post.date).getDate()}/{new Date(post.date).getMonth()+1}
                   </div>
                   <div className="text-[10px] font-sans text-white/60 tracking-wider mt-1">
-                    {item.year}
+                    {new Date(post.date).getFullYear()}
                   </div>
+                </div>
+
+                {/* Title at bottom */}
+                <div className="absolute bottom-4 left-4 right-4 z-10">
+                  <p className="text-white text-sm font-medium leading-snug line-clamp-2 drop-shadow-md">
+                    {post.title}
+                  </p>
                 </div>
 
                 {/* Hover indicator */}
@@ -181,7 +172,7 @@ const Home = () => {
                     <ChevronRight size={14} className="text-white" />
                   </div>
                 </div>
-              </a>
+              </Link>
             ))}
           </div>
         </div>
