@@ -77,7 +77,7 @@ const Home = () => {
                 {t("home.welcome", "Добродошли на званичну презентацију новоосноване Епархије швајцарске.")}
               </p>
               <Link 
-                href="/history"
+                to="/history"
                 className="inline-flex items-center border border-white/50 text-white px-8 py-3 font-sans text-xs tracking-[0.2em] uppercase hover:bg-white hover:text-gray-900 transition-all duration-500"
               >
                 {t("home.read_more", "ОПШИРНИЈЕ")}
@@ -108,7 +108,7 @@ const Home = () => {
         {/* "БЕСЕДЕ ЕПИСКОПА" Gold Bar — like reference */}
         <div className="absolute bottom-0 right-0 z-20 hidden md:block">
           <Link 
-            href="/bishop" 
+            to="/bishop" 
             className="flex items-center bg-orthodox-gold text-white px-8 py-4 font-sans text-xs tracking-[0.2em] uppercase font-bold hover:bg-orthodox-brown transition-colors duration-300"
           >
             <svg className="w-5 h-5 mr-3 opacity-70" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
@@ -127,7 +127,7 @@ const Home = () => {
               {t("home.news_title", "Епархијске Вести")}
             </h2>
             <Link 
-              href="/vesti"
+              to="/vesti"
               className="text-orthodox-gold font-sans text-xs tracking-[0.15em] uppercase font-bold hover:text-orthodox-brown transition-colors flex items-center"
             >
               {t("home.all_news", "Све Вести")}
@@ -140,7 +140,7 @@ const Home = () => {
             {latestPosts.map((post) => (
               <Link 
                 key={post.id}
-                href="/vesti"
+                to="/vesti"
                 className="group relative aspect-[3/4] overflow-hidden cursor-pointer"
               >
                 <div 
