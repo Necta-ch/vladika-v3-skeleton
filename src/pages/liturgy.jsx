@@ -1,8 +1,8 @@
 import { useTranslation } from "react-i18next";
 import { motion } from "framer-motion";
 import { Calendar, Clock, MapPin, ChevronRight } from "lucide-react";
-import Head from "next/head";
-import Link from "next/link";
+;
+import { Link } from "react-router-dom";
 import LiturgyCalendar from "../components/LiturgyCalendar";
 
 const Liturgy = () => {
@@ -126,9 +126,6 @@ const Liturgy = () => {
 
   return (
     <>
-      <Head>
-        <title>{t("liturgy.page_title", "Распоред богослужења")} | {t("home.title", "Епархија швајцарска")}</title>
-      </Head>
 
       <div className="min-h-screen bg-[#FDFBF7] font-sans">
         {/* Banner */}
@@ -152,7 +149,7 @@ const Liturgy = () => {
               <span className="text-orthodox-gold font-bold">{t("liturgy.note_label", "Напомена:")}</span>{" "}
               {t("liturgy.note_text", "Тачне информације о времену богослужења потражите на веб страницама појединих парохија или контактирајте свештеника директно.")}
             </p>
-            <Link href="/sematizam" className="text-orthodox-gold text-xs tracking-[0.15em] uppercase font-bold hover:text-white transition-colors whitespace-nowrap flex items-center">
+            <Link to="/sematizam" className="text-orthodox-gold text-xs tracking-[0.15em] uppercase font-bold hover:text-white transition-colors whitespace-nowrap flex items-center">
               {t("liturgy.all_parishes_link", "Све Парохије")}
               <ChevronRight size={14} className="ml-1" />
             </Link>

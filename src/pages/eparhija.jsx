@@ -1,15 +1,12 @@
 import { useTranslation } from "react-i18next";
 import { Map } from "lucide-react";
-import Head from "next/head";
+;
 
 const Eparhija = () => {
   const { t } = useTranslation();
 
   return (
     <>
-      <Head>
-        <title>{t("eparchy.title", "Епархија швајцарска")} | Српска Православна Црква</title>
-      </Head>
       <div className="min-h-screen bg-[#Fdfdfd] pt-[138px]">
         
         {/* Page Header */}

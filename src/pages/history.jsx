@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Head from 'next/head';
+;
 import { motion } from 'framer-motion';
 import { useTranslation } from "react-i18next";
 
@@ -37,9 +37,6 @@ export default function HistoryPage() {
 
   return (
     <>
-      <Head>
-        <title>{t("history.title", "Историјат Епархије")} | Епархија швајцарска</title>
-      </Head>
 
       <div className="min-h-screen bg-[#FDFBF7] font-sans selection:bg-orthodox-gold selection:text-white">
         

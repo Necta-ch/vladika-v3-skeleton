@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import Head from 'next/head';
+;
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight, Star, BookOpen, UtensilsCrossed, Calendar as CalendarIcon, Church } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
@@ -83,9 +83,6 @@ export default function OrthodoxCalendarPage() {
 
   return (
     <>
-      <Head>
-        <title>{t("calendar.title", "Православни Календар")} | {t("home.title", "Епархија швајцарска")}</title>
-      </Head>
 
       <div className="min-h-screen bg-[#FDFBF7] font-sans">
         {/* Banner */}

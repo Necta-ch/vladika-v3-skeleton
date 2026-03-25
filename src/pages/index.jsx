@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronRight, ChevronLeft, Calendar, MapPin } from "lucide-react";
-import Link from "next/link";
+import { Link } from "react-router-dom";
 import { useState, useEffect, useCallback } from "react";
 import newsPosts from '../data/newsPosts';
 
@@ -185,7 +185,7 @@ const Home = () => {
             
             {/* Bishop Promo Card */}
             <div className="lg:col-span-7">
-              <Link href="/bishop" className="group block relative overflow-hidden h-full min-h-[400px]">
+              <Link to="/bishop" className="group block relative overflow-hidden h-full min-h-[400px]">
                 <div className="absolute inset-0 bg-[url('/img/bishop-portrait-real.jpeg')] bg-cover bg-top transition-transform duration-700 group-hover:scale-105" />
                 <div className="absolute inset-0 bg-gradient-to-r from-orthodox-brown/90 via-orthodox-brown/60 to-transparent" />
                 <div className="relative z-10 p-10 md:p-16 flex flex-col justify-end h-full text-white">

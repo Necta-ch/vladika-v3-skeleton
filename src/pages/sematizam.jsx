@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Head from 'next/head';
+;
 import { motion, AnimatePresence } from 'framer-motion';
 import { MapPin, Phone, Mail, Globe, Users, Clock } from 'lucide-react';
 import { useTranslation } from "react-i18next";
@@ -193,9 +193,6 @@ export default function SematizamPage() {
 
   return (
     <>
-      <Head>
-        <title>{t("directory.title", "Све Цркве")} | Епархија швајцарска</title>
-      </Head>
 
       <div className="min-h-screen bg-[#FDFBF7] font-sans">
         

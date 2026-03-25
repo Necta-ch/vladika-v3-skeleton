@@ -1,16 +1,13 @@
 import { useTranslation } from "react-i18next";
 import { motion } from "framer-motion";
 import { Mail, Phone, MapPin, Send, Clock } from "lucide-react";
-import Head from "next/head";
+;
 
 const Contact = () => {
   const { t } = useTranslation();
 
   return (
     <>
-      <Head>
-        <title>{t("nav.contact", "Контакт")} | {t("home.title", "Епархија швајцарска")}</title>
-      </Head>
       <div className="min-h-screen bg-[#FDFBF7]">
         {/* Page Hero Banner */}
         <div className="bg-[#6b151b] pt-40 pb-20 text-center relative overflow-hidden">

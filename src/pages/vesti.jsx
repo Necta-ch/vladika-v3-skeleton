@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import Head from 'next/head';
-import Link from 'next/link';
+;
+import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Calendar, MapPin, ChevronRight, ChevronLeft, X, ArrowLeft } from 'lucide-react';
 import { useTranslation } from "react-i18next";
@@ -38,10 +38,6 @@ export default function VestiPage() {
 
   return (
     <>
-      <Head>
-        <title>{t("news.page_title", "Вести")} | Епархија швајцарска</title>
-        <meta name="description" content="Најновије вести из Епархије швајцарске Српске Православне Цркве" />
-      </Head>
 
       <div className="min-h-screen bg-[#FDFBF7] font-sans">
 

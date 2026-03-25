@@ -1,15 +1,33 @@
-import "../styles/globals.css";
-import "../i18n";
-import { useTranslation } from "react-i18next";
-import Navbar from "../components/Navbar";
-import { motion, AnimatePresence } from "framer-motion";
-import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
-import Link from "next/link";
+import { Routes, Route, useLocation } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+import { motion, AnimatePresence } from 'framer-motion';
+import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import Navbar from './components/Navbar';
 
-function MyApp({ Component, pageProps }) {
+// Pages
+import Home from './pages/index';
+import Eparhija from './pages/eparhija';
+import History from './pages/history';
+import Sematizam from './pages/sematizam';
+import Liturgy from './pages/liturgy';
+import Calendar from './pages/calendar';
+import Bishop from './pages/bishop';
+import Contact from './pages/contact';
+import Vesti from './pages/vesti';
+import Admin from './pages/admin';
+
+function ScrollToTop() {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+  return null;
+}
+
+function App() {
   const { i18n } = useTranslation();
-  const router = useRouter();
+  const location = useLocation();
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -18,21 +36,33 @@ function MyApp({ Component, pageProps }) {
 
   if (!mounted) return null;
 
-  const isHomepage = router.pathname === "/";
+  const isHomepage = location.pathname === '/';
 
   return (
     <div dir={i18n.dir()}>
+      <ScrollToTop />
       <Navbar />
       <AnimatePresence mode="wait">
         <motion.main
-          key={router.route}
+          key={location.pathname}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.5 }}
-          className={isHomepage ? "min-h-screen" : "pt-[130px] min-h-screen"}
+          className={isHomepage ? 'min-h-screen' : 'pt-[130px] min-h-screen'}
         >
-          <Component {...pageProps} />
+          <Routes location={location}>
+            <Route path="/" element={<Home />} />
+            <Route path="/eparhija" element={<Eparhija />} />
+            <Route path="/history" element={<History />} />
+            <Route path="/sematizam" element={<Sematizam />} />
+            <Route path="/liturgy" element={<Liturgy />} />
+            <Route path="/calendar" element={<Calendar />} />
+            <Route path="/bishop" element={<Bishop />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/vesti" element={<Vesti />} />
+            <Route path="/admin" element={<Admin />} />
+          </Routes>
         </motion.main>
       </AnimatePresence>
       <Footer />
@@ -55,10 +85,10 @@ const Footer = () => {
           <div className="space-y-6">
             <h4 className="font-serif text-lg uppercase tracking-widest text-orthodox-gold">{t("footer.links_title", "Навигација")}</h4>
             <ul className="space-y-3 font-sans text-gray-400 text-sm">
-              <li><Link href="/" className="hover:text-white transition-colors">{t("footer.link_home", "Почетна")}</Link></li>
-              <li><Link href="/bishop" className="hover:text-white transition-colors">{t("footer.link_bishop", "Епископ Андреј")}</Link></li>
-              <li><Link href="/liturgy" className="hover:text-white transition-colors">{t("footer.link_schedule", "Распоред богослужења")}</Link></li>
-              <li><Link href="/contact" className="hover:text-white transition-colors">{t("footer.link_contact", "Контакт")}</Link></li>
+              <li><Link to="/" className="hover:text-white transition-colors">{t("footer.link_home", "Почетна")}</Link></li>
+              <li><Link to="/bishop" className="hover:text-white transition-colors">{t("footer.link_bishop", "Епископ Андреј")}</Link></li>
+              <li><Link to="/liturgy" className="hover:text-white transition-colors">{t("footer.link_schedule", "Распоред богослужења")}</Link></li>
+              <li><Link to="/contact" className="hover:text-white transition-colors">{t("footer.link_contact", "Контакт")}</Link></li>
             </ul>
           </div>
           <div className="space-y-6">
@@ -84,4 +114,4 @@ const Footer = () => {
   );
 };
 
-export default MyApp;
+export default App;

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Head from 'next/head';
+;
 import { motion, AnimatePresence } from 'framer-motion';
 import { Lock, LogOut, Plus, Trash2, Edit3, Eye, Calendar, FileText, Settings, ChevronRight } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
@@ -115,9 +115,6 @@ export default function AdminPage() {
   if (!isLoggedIn) {
     return (
       <>
-        <Head>
-          <title>{t("admin.login_title", "Администрација")} | {t("home.title", "Епархија швајцарска")}</title>
-        </Head>
         <div className="min-h-screen bg-[#FDFBF7] flex items-center justify-center px-4">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -165,9 +162,6 @@ export default function AdminPage() {
   // ADMIN DASHBOARD
   return (
     <>
-      <Head>
-        <title>{t("admin.dashboard_title", "Администрација")} | {t("home.title", "Епархија швајцарска")}</title>
-      </Head>
       <div className="min-h-screen bg-[#FDFBF7] pt-28">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
           {/* Header */}

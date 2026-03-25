@@ -1,9 +1,7 @@
 node_modules
-.next
+dist
 out
+.next
 .DS_Store
-*.local
-.env
-docs_temp/
+docs_temp
 *.tiff
-public/test.css

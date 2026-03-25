@@ -1,19 +1,18 @@
 import { useTranslation } from "react-i18next";
 import { useState, useEffect } from "react";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import { Menu, X, Globe, Search, Mail, ChevronDown } from "lucide-react";
+import { Link, useLocation } from "react-router-dom";
+import { Menu, X, Globe, Mail, ChevronDown } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const Navbar = () => {
   const { t, i18n } = useTranslation();
-  const router = useRouter();
+  const location = useLocation();
   const [isOpen, setIsOpen] = useState(false);
   const [isLangMenuOpen, setIsLangMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
   // Check if we're on the homepage (hero overlaps navbar)
-  const isHomepage = router.pathname === "/";
+  const isHomepage = location.pathname === "/";
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 80);
@@ -62,7 +61,7 @@ const Navbar = () => {
           isTransparent ? "border-white/20" : "border-gray-100"
         }`}>
           {/* Logo + Title */}
-          <Link href="/" className="flex flex-col group">
+          <Link to="/" className="flex flex-col group">
             <span className={`text-[9px] font-bold uppercase tracking-[0.3em] font-sans mb-1 transition-colors duration-500 ${
               isTransparent ? "text-white/70" : "text-gray-400"
             }`}>
@@ -145,16 +144,16 @@ const Navbar = () => {
           {navLinks.map((link) => (
             <Link 
               key={link.href} 
-              href={link.href}
+              to={link.href}
               className={`relative px-4 py-2 text-[11px] font-sans font-medium tracking-[0.15em] uppercase transition-colors duration-300 group ${
                 isTransparent 
                   ? "text-white/85 hover:text-white" 
                   : "text-gray-600 hover:text-orthodox-brown"
-              } ${router.pathname === link.href ? (isTransparent ? "text-white font-bold" : "text-orthodox-brown font-bold") : ""}`}
+              } ${location.pathname === link.href ? (isTransparent ? "text-white font-bold" : "text-orthodox-brown font-bold") : ""}`}
             >
               {link.label}
               <span className={`absolute bottom-0 left-4 right-4 h-[2px] transition-transform duration-300 origin-left ${
-                router.pathname === link.href ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
+                location.pathname === link.href ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
               } ${isTransparent ? "bg-white" : "bg-orthodox-gold"}`}></span>
             </Link>
           ))}
@@ -174,7 +173,7 @@ const Navbar = () => {
               {navLinks.map((link) => (
                 <Link
                   key={link.href}
-                  href={link.href}
+                  to={link.href}
                   className="block px-3 py-4 text-base font-medium text-gray-700 hover:text-orthodox-gold border-b border-gray-50 font-sans"
                   onClick={() => setIsOpen(false)}
                 >
