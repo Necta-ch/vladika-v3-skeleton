@@ -36,53 +36,44 @@ const Home = () => {
     <div className="flex flex-col min-h-screen bg-white">
       
       {/* ===== CINEMATIC HERO SLIDER ===== */}
-      <section className="relative h-screen min-h-[700px] w-full overflow-hidden">
+      <section className="relative h-[100svh] min-h-[500px] md:min-h-[700px] w-full overflow-hidden">
         
-        {/* Slides */}
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={current}
-            initial={{ opacity: 0, scale: 1.05 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 1.2 }}
-            className="absolute inset-0"
-          >
-            <div 
-              className="absolute inset-0 bg-cover bg-no-repeat"
-              style={{ 
-                backgroundImage: `url('${heroSlides[current].image}')`,
-                backgroundPosition: heroSlides[current].position
-              }}
-            />
-            <div className="absolute inset-0 bg-gradient-to-l from-black/70 via-black/30 to-transparent" />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/20" />
-          </motion.div>
-        </AnimatePresence>
+        {/* Background Images — only these animate */}
+        {heroSlides.map((slide, i) => (
+          <div
+            key={i}
+            className="absolute inset-0 bg-cover bg-no-repeat transition-opacity duration-[1500ms] ease-in-out"
+            style={{ 
+              backgroundImage: `url('${slide.image}')`,
+              backgroundPosition: slide.position,
+              opacity: i === current ? 1 : 0,
+              transform: i === current ? 'scale(1)' : 'scale(1.05)',
+              transition: 'opacity 1.5s ease-in-out, transform 8s ease-out'
+            }}
+          />
+        ))}
 
-        {/* Hero Text — Right Aligned like reference */}
+        {/* Static overlays — never animate */}
+        <div className="absolute inset-0 bg-gradient-to-l from-black/70 via-black/30 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/20" />
+
+        {/* Hero Text — Static, never re-mounts on slide change */}
         <div className="absolute inset-0 flex items-center justify-end z-10">
           <div className="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8">
-            <motion.div
-              key={`text-${current}`}
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.3 }}
-              className="text-right max-w-2xl ml-auto"
-            >
-              <h1 className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-serif text-white leading-[1.05] mb-8 drop-shadow-lg">
+            <div className="text-right max-w-2xl ml-auto">
+              <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-serif text-white leading-[1.05] mb-4 sm:mb-6 md:mb-8 drop-shadow-lg">
                 {t("home.title", "Епархија швајцарска")}
               </h1>
-              <p className="text-lg md:text-xl text-white/80 font-sans font-light leading-relaxed mb-10 max-w-xl ml-auto">
+              <p className="text-sm sm:text-base md:text-lg lg:text-xl text-white/80 font-sans font-light leading-relaxed mb-6 sm:mb-8 md:mb-10 max-w-xl ml-auto">
                 {t("home.welcome", "Добродошли на званичну презентацију новоосноване Епархије швајцарске.")}
               </p>
               <Link 
                 to="/history"
-                className="inline-flex items-center border border-white/50 text-white px-8 py-3 font-sans text-xs tracking-[0.2em] uppercase hover:bg-white hover:text-gray-900 transition-all duration-500"
+                className="inline-flex items-center border border-white/50 text-white px-5 sm:px-8 py-2.5 sm:py-3 font-sans text-[10px] sm:text-xs tracking-[0.2em] uppercase hover:bg-white hover:text-gray-900 transition-all duration-500"
               >
                 {t("home.read_more", "ОПШИРНИЈЕ")}
               </Link>
-            </motion.div>
+            </div>
           </div>
         </div>
 
@@ -141,6 +132,7 @@ const Home = () => {
               <Link 
                 key={post.id}
                 to="/vesti"
+                state={{ openPostId: post.id }}
                 className="group relative aspect-[3/4] overflow-hidden cursor-pointer"
               >
                 <div 
@@ -149,13 +141,15 @@ const Home = () => {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
                 
-                {/* Date Overlay */}
-                <div className="absolute top-4 left-4 z-10">
-                  <div className="text-3xl md:text-4xl font-serif font-bold text-white leading-none drop-shadow-lg">
-                    {new Date(post.date).getDate()}/{new Date(post.date).getMonth()+1}
-                  </div>
-                  <div className="text-[10px] font-sans text-white/60 tracking-wider mt-1">
-                    {new Date(post.date).getFullYear()}
+                {/* Date Overlay — improved readability */}
+                <div className="absolute top-3 left-3 z-10">
+                  <div className="bg-black/50 backdrop-blur-sm rounded-lg px-3 py-2">
+                    <div className="text-xl md:text-2xl font-serif font-bold text-white leading-none">
+                      {new Date(post.date).getDate()}.{new Date(post.date).getMonth()+1}.
+                    </div>
+                    <div className="text-xs font-sans text-white/90 tracking-wider mt-0.5 font-medium">
+                      {new Date(post.date).getFullYear()}
+                    </div>
                   </div>
                 </div>
 

@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
-;
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Calendar, MapPin, ChevronRight, ChevronLeft, X, ArrowLeft } from 'lucide-react';
 import { useTranslation } from "react-i18next";
@@ -31,10 +30,21 @@ function formatDateShort(dateStr) {
 
 export default function VestiPage() {
   const { t } = useTranslation();
+  const location = useLocation();
   const [selectedPost, setSelectedPost] = useState(null);
   const [imageViewer, setImageViewer] = useState(null);
 
   const sortedPosts = [...newsPosts].sort((a, b) => new Date(b.date) - new Date(a.date));
+
+  // Auto-open a post if navigated from homepage news card
+  useEffect(() => {
+    if (location.state?.openPostId) {
+      const post = newsPosts.find(p => p.id === location.state.openPostId);
+      if (post) setSelectedPost(post);
+      // Clear the state so back/refresh doesn't re-trigger
+      window.history.replaceState({}, '');
+    }
+  }, [location.state]);
 
   return (
     <>
