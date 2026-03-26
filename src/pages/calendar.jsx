@@ -1,16 +1,24 @@
 import React, { useState, useMemo } from 'react';
-;
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight, Star, BookOpen, UtensilsCrossed, Calendar as CalendarIcon, Church } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { getTodaySaint, getMonthSaints, getSaintByDate, getFastingLabel, getTypeLabel } from '../data/orthodoxCalendarData';
 
-const MONTH_NAMES_SR = [
-  'Јануар', 'Фебруар', 'Март', 'Април', 'Мај', 'Јун',
-  'Јул', 'Август', 'Септембар', 'Октобар', 'Новембар', 'Децембар'
-];
+const MONTH_NAMES = {
+  de: ['Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember'],
+  it: ['Gennaio','Febbraio','Marzo','Aprile','Maggio','Giugno','Luglio','Agosto','Settembre','Ottobre','Novembre','Dicembre'],
+  sr: ['Јануар','Фебруар','Март','Април','Мај','Јун','Јул','Август','Септембар','Октобар','Новембар','Децембар'],
+  'sr-cyrillic': ['Јануар','Фебруар','Март','Април','Мај','Јун','Јул','Август','Септембар','Октобар','Новембар','Децембар'],
+  'sr-latin': ['Januar','Februar','Mart','April','Maj','Jun','Jul','Avgust','Septembar','Oktobar','Novembar','Decembar']
+};
 
-const DAY_NAMES_SR = ['Пон', 'Уто', 'Сре', 'Чет', 'Пет', 'Суб', 'Нед'];
+const DAY_NAMES = {
+  de: ['Mo','Di','Mi','Do','Fr','Sa','So'],
+  it: ['Lun','Mar','Mer','Gio','Ven','Sab','Dom'],
+  sr: ['Пон','Уто','Сре','Чет','Пет','Суб','Нед'],
+  'sr-cyrillic': ['Пон','Уто','Сре','Чет','Пет','Суб','Нед'],
+  'sr-latin': ['Pon','Uto','Sre','Čet','Pet','Sub','Ned']
+};
 
 function getDaysInMonth(year, month) {
   return new Date(year, month, 0).getDate();
@@ -44,7 +52,10 @@ const fastingColors = {
 };
 
 export default function OrthodoxCalendarPage() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const lang = i18n.language;
+  const monthNames = MONTH_NAMES[lang] || MONTH_NAMES['de'];
+  const dayNames = DAY_NAMES[lang] || DAY_NAMES['de'];
   const today = new Date();
   const [currentMonth, setCurrentMonth] = useState(today.getMonth() + 1);
   const [currentYear, setCurrentYear] = useState(today.getFullYear());
@@ -116,7 +127,7 @@ export default function OrthodoxCalendarPage() {
                   <span className={`inline-block px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest mb-4 ${
                     todaySaint.type === 'great' ? 'bg-orthodox-gold/20 text-orthodox-gold' : 'bg-orthodox-gold/10 text-orthodox-gold'
                   }`}>
-                    {t("calendar.today", "Данас")} • {today.getDate()}. {MONTH_NAMES_SR[today.getMonth()]}
+                    {t("calendar.today", "Heute")} • {today.getDate()}. {monthNames[today.getMonth()]}
                   </span>
                   <h2 className={`text-2xl md:text-3xl font-serif mb-3 ${todaySaint.type === 'great' ? 'text-orthodox-gold' : 'text-gray-900'}`}>
                     {todaySaint.saint}
@@ -125,12 +136,12 @@ export default function OrthodoxCalendarPage() {
                     <span className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold ${
                       todaySaint.type === 'great' ? 'bg-white/10 text-white' : typeColors[todaySaint.type]
                     }`}>
-                      <Church size={12} /> {getTypeLabel(todaySaint.type)}
+                      <Church size={12} /> {getTypeLabel(todaySaint.type, lang)}
                     </span>
                     <span className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold ${
                       todaySaint.type === 'great' ? 'bg-white/10 text-white' : fastingColors[todaySaint.fasting]
                     }`}>
-                      <UtensilsCrossed size={12} /> {getFastingLabel(todaySaint.fasting)}
+                      <UtensilsCrossed size={12} /> {getFastingLabel(todaySaint.fasting, lang)}
                     </span>
                     {todaySaint.slava && (
                       <span className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold ${
@@ -161,7 +172,7 @@ export default function OrthodoxCalendarPage() {
                     <ChevronLeft size={20} />
                   </button>
                   <h3 className="text-xl font-serif tracking-wide">
-                    {MONTH_NAMES_SR[currentMonth - 1]} {currentYear}
+                    {monthNames[currentMonth - 1]} {currentYear}
                   </h3>
                   <button onClick={nextMonth} className="p-2 hover:bg-white/10 rounded-lg transition-colors">
                     <ChevronRight size={20} />
@@ -170,7 +181,7 @@ export default function OrthodoxCalendarPage() {
 
                 {/* Day Names Header */}
                 <div className="grid grid-cols-7 border-b border-gray-100">
-                  {DAY_NAMES_SR.map(d => (
+                  {dayNames.map(d => (
                     <div key={d} className="text-center py-3 text-xs font-bold text-gray-400 uppercase tracking-widest">
                       {d}
                     </div>
@@ -249,7 +260,7 @@ export default function OrthodoxCalendarPage() {
                         'bg-gray-50 text-gray-900'
                       }`}>
                         <p className="text-xs font-bold uppercase tracking-widest mb-2 opacity-70">
-                          {selectedDay}. {MONTH_NAMES_SR[currentMonth - 1]} {currentYear}
+                          {selectedDay}. {monthNames[currentMonth - 1]} {currentYear}
                         </p>
                         <h3 className="text-xl font-serif leading-snug">
                           {selectedSaint.saint}
@@ -262,7 +273,7 @@ export default function OrthodoxCalendarPage() {
                           <Church size={18} className="text-orthodox-gold" />
                           <div>
                             <p className="text-[10px] font-bold uppercase tracking-widest text-gray-400">{t("calendar.type", "Тип дана")}</p>
-                            <p className="text-sm font-semibold text-gray-900">{getTypeLabel(selectedSaint.type)}</p>
+                            <p className="text-sm font-semibold text-gray-900">{getTypeLabel(selectedSaint.type, lang)}</p>
                           </div>
                         </div>
 
@@ -272,7 +283,7 @@ export default function OrthodoxCalendarPage() {
                           <div>
                             <p className="text-[10px] font-bold uppercase tracking-widest text-gray-400">{t("calendar.fasting", "Пост")}</p>
                             <span className={`inline-block px-3 py-1 rounded-lg text-xs font-bold ${fastingColors[selectedSaint.fasting]}`}>
-                              {getFastingLabel(selectedSaint.fasting)}
+                              {getFastingLabel(selectedSaint.fasting, lang)}
                             </span>
                           </div>
                         </div>
@@ -305,7 +316,7 @@ export default function OrthodoxCalendarPage() {
                 <div className="px-6 py-4 border-b border-gray-100">
                   <h4 className="font-serif text-lg text-gray-900 flex items-center gap-2">
                     <BookOpen size={18} className="text-orthodox-gold" />
-                    {t("calendar.month_list", "Све славе овог месеца")}
+                    {t("calendar.month_saints", "Све славе овог месеца")}
                   </h4>
                 </div>
                 <div className="max-h-[400px] overflow-y-auto">

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-;
 import { motion, AnimatePresence } from 'framer-motion';
 import { Lock, LogOut, Plus, Trash2, Edit3, Eye, Calendar, FileText, Settings, ChevronRight } from 'lucide-react';
 import { useTranslation } from 'react-i18next';

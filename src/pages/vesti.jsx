@@ -4,32 +4,11 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Calendar, MapPin, ChevronRight, ChevronLeft, X, ArrowLeft } from 'lucide-react';
 import { useTranslation } from "react-i18next";
 import newsPosts from '../data/newsPosts';
-
-const categoryLabels = {
-  'liturgija': 'Литургија',
-  'dogadjaj': 'Догађај',
-  'saopstenje': 'Саопштење'
-};
-
-const categoryColors = {
-  'liturgija': 'bg-orthodox-gold text-white',
-  'dogadjaj': 'bg-[#6b151b] text-white',
-  'saopstenje': 'bg-gray-700 text-white'
-};
-
-function formatDate(dateStr) {
-  const d = new Date(dateStr);
-  const months = ['јануар', 'фебруар', 'март', 'април', 'мај', 'јун', 'јул', 'август', 'септембар', 'октобар', 'новембар', 'децембар'];
-  return `${d.getDate()}. ${months[d.getMonth()]} ${d.getFullYear()}.`;
-}
-
-function formatDateShort(dateStr) {
-  const d = new Date(dateStr);
-  return `${d.getDate()}/${d.getMonth() + 1}`;
-}
+import { useLocalized } from '../utils/localeHelper';
 
 export default function VestiPage() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const L = useLocalized();
   const location = useLocation();
   const [selectedPost, setSelectedPost] = useState(null);
   const [imageViewer, setImageViewer] = useState(null);
@@ -46,6 +25,47 @@ export default function VestiPage() {
     }
   }, [location.state]);
 
+  function formatDate(dateStr) {
+    const d = new Date(dateStr);
+    const monthKey = 'months.' + d.getMonth();
+    const monthNames = {
+      de: ['Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember'],
+      it: ['gennaio','febbraio','marzo','aprile','maggio','giugno','luglio','agosto','settembre','ottobre','novembre','dicembre'],
+      sr: ['јануар','фебруар','март','април','мај','јун','јул','август','септембар','октобар','новембар','децембар'],
+      'sr-latin': ['januar','februar','mart','april','maj','jun','jul','avgust','septembar','oktobar','novembar','decembar'],
+      'sr-cyrillic': ['јануар','фебруар','март','април','мај','јун','јул','август','септембар','октобар','новембар','децембар']
+    };
+    const lang = i18n.language;
+    const months = monthNames[lang] || monthNames['de'];
+    return `${d.getDate()}. ${months[d.getMonth()]} ${d.getFullYear()}.`;
+  }
+
+  function getMonthAbbr(dateStr) {
+    const d = new Date(dateStr);
+    const abbrs = {
+      de: ['JAN','FEB','MÄR','APR','MAI','JUN','JUL','AUG','SEP','OKT','NOV','DEZ'],
+      it: ['GEN','FEB','MAR','APR','MAG','GIU','LUG','AGO','SET','OTT','NOV','DIC'],
+      sr: ['ЈАН','ФЕБ','МАР','АПР','МАЈ','ЈУН','ЈУЛ','АВГ','СЕП','ОКТ','НОВ','ДЕЦ'],
+      'sr-latin': ['JAN','FEB','MAR','APR','MAJ','JUN','JUL','AVG','SEP','OKT','NOV','DEC'],
+      'sr-cyrillic': ['ЈАН','ФЕБ','МАР','АПР','МАЈ','ЈУН','ЈУЛ','АВГ','СЕП','ОКТ','НОВ','ДЕЦ']
+    };
+    const lang = i18n.language;
+    const a = abbrs[lang] || abbrs['de'];
+    return a[d.getMonth()];
+  }
+
+  function getCategoryLabel(cat) {
+    const key = `news.cat_${cat}`;
+    const fallback = { liturgija: 'Liturgie', dogadjaj: 'Ereignis', saopstenje: 'Mitteilung' };
+    return t(key, fallback[cat] || cat);
+  }
+
+  const categoryColors = {
+    'liturgija': 'bg-orthodox-gold text-white',
+    'dogadjaj': 'bg-[#6b151b] text-white',
+    'saopstenje': 'bg-gray-700 text-white'
+  };
+
   return (
     <>
 
@@ -55,8 +75,8 @@ export default function VestiPage() {
         <div className="bg-[#6b151b] pt-40 pb-20 text-center relative overflow-hidden">
           <div className="absolute inset-0 bg-[url('/img/orthodox-church-bg.jpg')] bg-center bg-cover opacity-10 mix-blend-overlay"></div>
           <div className="relative z-10 container-custom">
-            <h1 className="text-4xl md:text-6xl font-serif font-bold text-white mb-6">{t("news.heading", "Епархијске Вести")}</h1>
-            <p className="text-[#D4AF37] tracking-[0.2em] text-sm uppercase font-bold">{t("news.subheading", "Актуелности из живота Епархије")}</p>
+            <h1 className="text-4xl md:text-6xl font-serif font-bold text-white mb-6">{t("news.heading", "Nachrichten der Eparchie")}</h1>
+            <p className="text-[#D4AF37] tracking-[0.2em] text-sm uppercase font-bold">{t("news.subheading", "Aktuelles aus dem Leben der Eparchie")}</p>
           </div>
         </div>
 
@@ -78,20 +98,20 @@ export default function VestiPage() {
                 className="flex items-center gap-2 text-[#6b151b] hover:text-orthodox-gold transition-colors mb-10 font-sans text-sm font-bold uppercase tracking-wider"
               >
                 <ArrowLeft size={16} />
-                {t("news.back", "Назад на вести")}
+                {t("news.back", "Zurück zu Nachrichten")}
               </button>
 
               <article className="max-w-4xl mx-auto">
                 {/* Category Badge */}
                 <div className="mb-6">
                   <span className={`inline-block px-4 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-widest ${categoryColors[selectedPost.category] || 'bg-gray-200'}`}>
-                    {categoryLabels[selectedPost.category] || selectedPost.category}
+                    {getCategoryLabel(selectedPost.category)}
                   </span>
                 </div>
 
                 {/* Title */}
                 <h1 className="text-3xl md:text-5xl lg:text-6xl font-serif text-gray-900 mb-8 leading-tight">
-                  {selectedPost.title}
+                  {L(selectedPost.title)}
                 </h1>
 
                 {/* Meta */}
@@ -102,7 +122,7 @@ export default function VestiPage() {
                   </div>
                   <div className="flex items-center gap-2">
                     <MapPin size={16} className="text-orthodox-gold" />
-                    {selectedPost.location}
+                    {L(selectedPost.location)}
                   </div>
                 </div>
 
@@ -111,21 +131,21 @@ export default function VestiPage() {
                   onClick={() => setImageViewer({ images: selectedPost.images, index: 0 })}
                 >
                   <img
-                    src={selectedPost.images[0]}
-                    alt={selectedPost.title}
+                    src={selectedPost.images?.[0] || '/img/image1.jpeg'}
+                    alt={L(selectedPost.title)}
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   {selectedPost.images.length > 1 && (
                     <div className="absolute bottom-4 right-4 bg-black/60 text-white px-3 py-1.5 rounded-full text-xs font-bold backdrop-blur-sm">
-                      +{selectedPost.images.length - 1} фото
+                      +{selectedPost.images.length - 1} {t("news.photo", "Foto")}
                     </div>
                   )}
                 </div>
 
                 {/* Article Body */}
                 <div className="prose prose-lg md:prose-xl max-w-none text-gray-700 leading-relaxed font-serif text-justify">
-                  {selectedPost.content.split('\n\n').map((paragraph, i) => (
+                  {String(L(selectedPost.content) || '').split('\n\n').map((paragraph, i) => (
                     <p key={i} className={i === 0 ? 'first-letter:text-6xl first-letter:font-bold first-letter:text-orthodox-gold first-letter:mr-2 first-letter:float-left first-letter:leading-none' : 'mt-6'}>
                       {paragraph}
                     </p>
@@ -136,7 +156,7 @@ export default function VestiPage() {
                 {selectedPost.images.length > 1 && (
                   <div className="mt-16">
                     <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-gray-400 mb-6 font-sans">
-                      {t("news.gallery", "Фото галерија")}
+                      {t("news.gallery", "Fotogalerie")}
                     </h3>
                     <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
                       {selectedPost.images.map((img, i) => (
@@ -147,7 +167,7 @@ export default function VestiPage() {
                         >
                           <img
                             src={img}
-                            alt={`${selectedPost.title} - фото ${i + 1}`}
+                            alt={`${L(selectedPost.title)} - ${t("news.photo", "Foto")} ${i + 1}`}
                             className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                           />
                         </div>
@@ -158,7 +178,7 @@ export default function VestiPage() {
 
                 {/* Facebook Link */}
                 <div className="mt-16 p-6 bg-gray-50 rounded-xl border border-gray-100 text-center">
-                  <p className="text-sm text-gray-500 mb-3">{t("news.see_on_fb", "Погледајте оригиналну објаву на Facebook страници")}</p>
+                  <p className="text-sm text-gray-500 mb-3">{t("news.see_on_fb", "Sehen Sie den Originalbeitrag auf Facebook")}</p>
                   <a
                     href="https://www.facebook.com/EpiskopAndrejCilerdzic"
                     target="_blank"
@@ -188,18 +208,18 @@ export default function VestiPage() {
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 bg-white rounded-2xl overflow-hidden shadow-[0_10px_40px_rgba(0,0,0,0.04)] border border-gray-100 hover:shadow-[0_20px_60px_rgba(0,0,0,0.08)] transition-all duration-500 hover:-translate-y-1">
                   <div className="lg:col-span-7 aspect-[16/10] lg:aspect-auto overflow-hidden relative">
                     <img
-                      src={sortedPosts[0].images[0]}
-                      alt={sortedPosts[0].title}
+                      src={sortedPosts[0].images?.[0] || '/img/image1.jpeg'}
+                      alt={L(sortedPosts[0].title)}
                       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                     />
                     <div className="absolute top-4 left-4">
                       <span className={`inline-block px-4 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-widest ${categoryColors[sortedPosts[0].category]}`}>
-                        {categoryLabels[sortedPosts[0].category]}
+                        {getCategoryLabel(sortedPosts[0].category)}
                       </span>
                     </div>
                     {sortedPosts[0].images.length > 1 && (
                       <div className="absolute bottom-4 right-4 bg-black/60 text-white px-3 py-1.5 rounded-full text-xs font-bold backdrop-blur-sm">
-                        {sortedPosts[0].images.length} фото
+                        {sortedPosts[0].images.length} {t("news.photo", "Foto")}
                       </div>
                     )}
                   </div>
@@ -211,17 +231,17 @@ export default function VestiPage() {
                       </span>
                     </div>
                     <h2 className="text-2xl md:text-3xl lg:text-4xl font-serif text-gray-900 mb-4 group-hover:text-[#6b151b] transition-colors leading-tight">
-                      {sortedPosts[0].title}
+                      {L(sortedPosts[0].title)}
                     </h2>
                     <p className="text-gray-500 leading-relaxed mb-6 line-clamp-3">
-                      {sortedPosts[0].summary}
+                      {L(sortedPosts[0].summary)}
                     </p>
                     <div className="flex items-center gap-2 text-sm text-gray-400">
                       <MapPin size={14} className="text-orthodox-gold" />
-                      {sortedPosts[0].location}
+                      {L(sortedPosts[0].location)}
                     </div>
                     <div className="mt-8 flex items-center gap-2 text-orthodox-gold font-sans text-xs tracking-[0.15em] uppercase font-bold group-hover:text-[#6b151b] transition-colors">
-                      {t("news.read_more", "Прочитајте више")}
+                      {t("news.read_more", "Weiterlesen")}
                       <ChevronRight size={14} className="group-hover:translate-x-1 transition-transform" />
                     </div>
                   </div>
@@ -242,26 +262,26 @@ export default function VestiPage() {
                     {/* Post Image */}
                     <div className="aspect-[16/10] overflow-hidden relative">
                       <img
-                        src={post.images[0]}
-                        alt={post.title}
+                        src={post.images?.[0] || '/img/image1.jpeg'}
+                        alt={L(post.title)}
                         className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
                       <div className="absolute top-4 left-4">
                         <span className={`inline-block px-3 py-1 rounded-full text-[9px] font-bold uppercase tracking-widest ${categoryColors[post.category]}`}>
-                          {categoryLabels[post.category]}
+                          {getCategoryLabel(post.category)}
                         </span>
                       </div>
                       {post.images.length > 1 && (
                         <div className="absolute bottom-3 right-3 bg-black/60 text-white px-2.5 py-1 rounded-full text-[10px] font-bold backdrop-blur-sm">
-                          {post.images.length} фото
+                          {post.images.length} {t("news.photo", "Foto")}
                         </div>
                       )}
                       {/* Date Badge */}
                       <div className="absolute bottom-3 left-3">
                         <div className="bg-white/95 backdrop-blur-sm rounded-lg px-3 py-2 text-center shadow-sm">
                           <div className="text-2xl font-serif font-bold text-gray-900 leading-none">{new Date(post.date).getDate()}</div>
-                          <div className="text-[9px] font-bold uppercase tracking-wider text-gray-400 mt-0.5">{['ЈАН','ФЕБ','МАР','АПР','МАЈ','ЈУН','ЈУЛ','АВГ','СЕП','ОКТ','НОВ','ДЕЦ'][new Date(post.date).getMonth()]}</div>
+                          <div className="text-[9px] font-bold uppercase tracking-wider text-gray-400 mt-0.5">{getMonthAbbr(post.date)}</div>
                         </div>
                       </div>
                     </div>
@@ -269,18 +289,18 @@ export default function VestiPage() {
                     {/* Post Content */}
                     <div className="p-6 flex flex-col flex-grow">
                       <h3 className="text-lg font-bold text-gray-900 mb-3 group-hover:text-[#6b151b] transition-colors leading-snug line-clamp-2">
-                        {post.title}
+                        {L(post.title)}
                       </h3>
                       <p className="text-sm text-gray-500 leading-relaxed mb-4 line-clamp-3 flex-grow">
-                        {post.summary}
+                        {L(post.summary)}
                       </p>
                       <div className="flex items-center justify-between pt-4 border-t border-gray-100">
                         <div className="flex items-center gap-1.5 text-xs text-gray-400">
                           <MapPin size={12} className="text-orthodox-gold" />
-                          {post.location}
+                          {L(post.location)}
                         </div>
                         <div className="flex items-center gap-1 text-orthodox-gold text-xs font-bold uppercase tracking-wider group-hover:text-[#6b151b] transition-colors">
-                          Више <ChevronRight size={12} className="group-hover:translate-x-0.5 transition-transform" />
+                          {t("news.read_more", "Weiterlesen")} <ChevronRight size={12} className="group-hover:translate-x-0.5 transition-transform" />
                         </div>
                       </div>
                     </div>
@@ -291,7 +311,7 @@ export default function VestiPage() {
               {/* CTA to Facebook */}
               <div className="mt-20 text-center">
                 <div className="w-16 h-[1px] bg-orthodox-gold mx-auto mb-8"></div>
-                <p className="text-gray-400 text-sm mb-6">{t("news.more_on_fb", "За више вести пратите нас на Facebook-у")}</p>
+                <p className="text-gray-400 text-sm mb-6">{t("news.more_on_fb", "Für weitere Nachrichten folgen Sie uns auf Facebook")}</p>
                 <a
                   href="https://www.facebook.com/EpiskopAndrejCilerdzic"
                   target="_blank"

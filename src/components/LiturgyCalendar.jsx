@@ -1,12 +1,22 @@
 import React, { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronLeft, ChevronRight, Clock, MapPin } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Clock, MapPin, CalendarPlus } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
-const MONTH_NAMES = [
-  'Јануар', 'Фебруар', 'Март', 'Април', 'Мај', 'Јун',
-  'Јул', 'Август', 'Септембар', 'Октобар', 'Новембар', 'Децембар'
-];
-const DAY_NAMES = ['Пон', 'Уто', 'Сре', 'Чет', 'Пет', 'Суб', 'Нед'];
+const MONTH_NAMES = {
+  de: ['Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember'],
+  it: ['Gennaio','Febbraio','Marzo','Aprile','Maggio','Giugno','Luglio','Agosto','Settembre','Ottobre','Novembre','Dicembre'],
+  sr: ['Јануар','Фебруар','Март','Април','Мај','Јун','Јул','Август','Септембар','Октобар','Новембар','Децембар'],
+  'sr-cyrillic': ['Јануар','Фебруар','Март','Април','Мај','Јун','Јул','Август','Септембар','Октобар','Новембар','Децембар'],
+  'sr-latin': ['Januar','Februar','Mart','April','Maj','Jun','Jul','Avgust','Septembar','Oktobar','Novembar','Decembar']
+};
+const DAY_NAMES_MAP = {
+  de: ['Mo','Di','Mi','Do','Fr','Sa','So'],
+  it: ['Lun','Mar','Mer','Gio','Ven','Sab','Dom'],
+  sr: ['Пон','Уто','Сре','Чет','Пет','Суб','Нед'],
+  'sr-cyrillic': ['Пон','Уто','Сре','Чет','Пет','Суб','Нед'],
+  'sr-latin': ['Pon','Uto','Sre','Čet','Pet','Sub','Ned']
+};
 
 function getDaysInMonth(year, month) {
   return new Date(year, month, 0).getDate();
@@ -18,12 +28,53 @@ function getFirstDayOfWeek(year, month) {
 }
 
 /**
+ * Generate and download an .ics calendar file for a service.
+ */
+function downloadICS({ title, location, address, date, time }) {
+  const [hours, minutes] = (time || '10:00').split(':').map(Number);
+  const start = new Date(date);
+  start.setHours(hours, minutes, 0, 0);
+  const end = new Date(start);
+  end.setHours(end.getHours() + 1, 30); // 1.5h default duration
+
+  const pad = (n) => String(n).padStart(2, '0');
+  const fmt = (d) => `${d.getFullYear()}${pad(d.getMonth() + 1)}${pad(d.getDate())}T${pad(d.getHours())}${pad(d.getMinutes())}00`;
+
+  const ics = [
+    'BEGIN:VCALENDAR',
+    'VERSION:2.0',
+    'PRODID:-//Eparhija Svajcarska//Vladika v3//EN',
+    'BEGIN:VEVENT',
+    `DTSTART:${fmt(start)}`,
+    `DTEND:${fmt(end)}`,
+    `SUMMARY:${title}`,
+    `LOCATION:${[location, address].filter(Boolean).join(', ')}`,
+    `DESCRIPTION:${title} — ${location}`,
+    `UID:${Date.now()}-${Math.random().toString(36).slice(2)}@vladika`,
+    'END:VEVENT',
+    'END:VCALENDAR'
+  ].join('\r\n');
+
+  const blob = new Blob([ics], { type: 'text/calendar;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `${(title || 'liturgija').replace(/[^a-zA-Z0-9а-яА-ЯёЁ\u0400-\u04FF]/g, '_')}.ics`;
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+/**
  * LiturgyCalendar component — shows a monthly calendar grid
  * with service days highlighted and a detail panel for the selected day.
  * 
  * @param {Array} parishes - Array of parish objects, each with { city, church, address, services: [{ day, time, type }] }
  */
 export default function LiturgyCalendar({ parishes = [] }) {
+  const { t, i18n } = useTranslation();
+  const lang = i18n.language;
+  const monthNames = MONTH_NAMES[lang] || MONTH_NAMES['de'];
+  const dayNames = DAY_NAMES_MAP[lang] || DAY_NAMES_MAP['de'];
   const today = new Date();
   const [month, setMonth] = useState(today.getMonth() + 1);
   const [year, setYear] = useState(today.getFullYear());
@@ -79,7 +130,7 @@ export default function LiturgyCalendar({ parishes = [] }) {
             <button onClick={prevMonth} className="p-2 hover:bg-white/10 rounded-lg transition-colors">
               <ChevronLeft size={18} />
             </button>
-            <h3 className="text-lg font-serif">{MONTH_NAMES[month - 1]} {year}</h3>
+            <h3 className="text-lg font-serif">{monthNames[month - 1]} {year}</h3>
             <button onClick={nextMonth} className="p-2 hover:bg-white/10 rounded-lg transition-colors">
               <ChevronRight size={18} />
             </button>
@@ -87,7 +138,7 @@ export default function LiturgyCalendar({ parishes = [] }) {
 
           {/* Day Names */}
           <div className="grid grid-cols-7 border-b border-gray-100">
-            {DAY_NAMES.map(d => (
+            {dayNames.map(d => (
               <div key={d} className="text-center py-2.5 text-[10px] font-bold text-gray-400 uppercase tracking-widest">
                 {d}
               </div>
@@ -131,10 +182,10 @@ export default function LiturgyCalendar({ parishes = [] }) {
           {/* Legend */}
           <div className="px-4 py-3 bg-gray-50/50 border-t border-gray-100 flex gap-4 text-xs text-gray-500">
             <span className="flex items-center gap-1.5">
-              <div className="w-2 h-2 rounded-full bg-orthodox-gold"></div> Богослужење
+              <div className="w-2 h-2 rounded-full bg-orthodox-gold"></div> {t('liturgy.service', 'Богослужење')}
             </span>
             <span className="flex items-center gap-1.5">
-              <div className="w-2 h-2 rounded-full bg-red-400"></div> Недеља
+              <div className="w-2 h-2 rounded-full bg-red-400"></div> {t('liturgy.sunday', 'Недеља')}
             </span>
           </div>
         </div>
@@ -151,10 +202,10 @@ export default function LiturgyCalendar({ parishes = [] }) {
             transition={{ duration: 0.2 }}
           >
             <h3 className="text-xl font-serif text-gray-900 mb-6">
-              {selectedDay}. {MONTH_NAMES[month - 1]} {year}
+              {selectedDay}. {monthNames[month - 1]} {year}
               {isToday(selectedDay) && (
                 <span className="ml-3 text-xs font-bold uppercase tracking-widest text-orthodox-gold bg-orthodox-gold/10 px-3 py-1 rounded-full">
-                  Данас
+                  {t('liturgy.today', 'Данас')}
                 </span>
               )}
             </h3>
@@ -187,14 +238,33 @@ export default function LiturgyCalendar({ parishes = [] }) {
                         ))}
                       </div>
                     </div>
+                    {/* Add to Calendar */}
+                    <div className="mt-3 pt-3 border-t border-gray-50 flex justify-end">
+                      <button
+                        onClick={() => {
+                          const svc = parish.services[0] || {};
+                          downloadICS({
+                            title: svc.type || t('liturgy.service', 'Богослужење'),
+                            location: `${parish.church}, ${parish.city}`,
+                            address: parish.address,
+                            date: new Date(year, month - 1, selectedDay),
+                            time: svc.time
+                          });
+                        }}
+                        className="flex items-center gap-2 text-xs font-semibold text-orthodox-gold hover:text-[#6b151b] transition-colors uppercase tracking-wider"
+                      >
+                        <CalendarPlus size={14} />
+                        {t('liturgy.add_to_calendar', 'Додај у календар')}
+                      </button>
+                    </div>
                   </div>
                 ))}
               </div>
             ) : (
               <div className="bg-white rounded-xl border border-gray-100 p-12 text-center">
                 <Clock size={36} className="mx-auto text-gray-200 mb-4" />
-                <p className="text-gray-400 text-sm">Нема заказаних богослужења за овај дан.</p>
-                <p className="text-xs text-gray-300 mt-2">Одаберите недељу за преглед литургија.</p>
+                <p className="text-gray-400 text-sm">{t('liturgy.no_services', 'Нема заказаних богослужења за овај дан.')}</p>
+                <p className="text-xs text-gray-300 mt-2">{t('liturgy.select_sunday', 'Одаберите недељу за преглед литургија.')}</p>
               </div>
             )}
           </motion.div>

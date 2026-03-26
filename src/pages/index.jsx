@@ -4,6 +4,7 @@ import { ChevronRight, ChevronLeft, Calendar, MapPin } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useState, useEffect, useCallback } from "react";
 import newsPosts from '../data/newsPosts';
+import { useLocalized } from '../utils/localeHelper';
 
 const heroSlides = [
   { image: "/img/hero-interior.png", position: "center" },
@@ -13,6 +14,7 @@ const heroSlides = [
 
 const Home = () => {
   const { t } = useTranslation();
+  const L = useLocalized();
   const [current, setCurrent] = useState(0);
 
   // Sort posts by date (newest first) and take the latest 5
@@ -137,7 +139,7 @@ const Home = () => {
               >
                 <div 
                   className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
-                  style={{ backgroundImage: `url('${post.images[0]}')` }}
+                  style={{ backgroundImage: `url('${post.images?.[0] || '/img/image1.jpeg'}')` }}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
                 
@@ -156,7 +158,7 @@ const Home = () => {
                 {/* Title at bottom */}
                 <div className="absolute bottom-4 left-4 right-4 z-10">
                   <p className="text-white text-sm font-medium leading-snug line-clamp-2 drop-shadow-md">
-                    {post.title}
+                    {L(post.title)}
                   </p>
                 </div>
 

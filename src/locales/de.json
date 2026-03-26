@@ -35,6 +35,10 @@
     "back": "Zurück zu Nachrichten",
     "gallery": "Fotogalerie",
     "read_more": "Weiterlesen",
+    "photo": "Foto",
+    "cat_liturgija": "Liturgie",
+    "cat_dogadjaj": "Ereignis",
+    "cat_saopstenje": "Mitteilung",
     "see_on_fb": "Sehen Sie den Originalbeitrag auf Facebook",
     "more_on_fb": "Für weitere Nachrichten folgen Sie uns auf Facebook"
   },
@@ -49,7 +53,8 @@
     "slava": "Slava",
     "slava_desc": "Familienheiliger",
     "no_info": "Keine Informationen für diesen Tag verfügbar.",
-    "month_list": "Januar,Februar,März,April,Mai,Juni,Juli,August,September,Oktober,November,Dezember"
+    "month_list": "Januar,Februar,März,April,Mai,Juni,Juli,August,September,Oktober,November,Dezember",
+    "month_saints": "Alle Slava-Tage dieses Monats"
   },
   "admin": {
     "login_title": "Anmeldung",

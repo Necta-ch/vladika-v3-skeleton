@@ -35,6 +35,10 @@
     "back": "Torna alle Notizie",
     "gallery": "Galleria Fotografica",
     "read_more": "Leggi di più",
+    "photo": "Foto",
+    "cat_liturgija": "Liturgia",
+    "cat_dogadjaj": "Evento",
+    "cat_saopstenje": "Comunicato",
     "see_on_fb": "Vedi il post originale sulla pagina Facebook",
     "more_on_fb": "Per più notizie seguici su Facebook"
   },
@@ -49,7 +53,8 @@
     "slava": "Slava",
     "slava_desc": "Santo patrono della famiglia",
     "no_info": "Nessuna informazione disponibile per questo giorno.",
-    "month_list": "Gennaio,Febbraio,Marzo,Aprile,Maggio,Giugno,Luglio,Agosto,Settembre,Ottobre,Novembre,Dicembre"
+    "month_list": "Gennaio,Febbraio,Marzo,Aprile,Maggio,Giugno,Luglio,Agosto,Settembre,Ottobre,Novembre,Dicembre",
+    "month_saints": "Tutte le Slave di questo mese"
   },
   "admin": {
     "login_title": "Accesso",

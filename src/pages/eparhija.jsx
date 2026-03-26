@@ -1,6 +1,5 @@
 import { useTranslation } from "react-i18next";
 import { Map } from "lucide-react";
-;
 
 const Eparhija = () => {
   const { t } = useTranslation();

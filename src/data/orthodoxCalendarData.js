@@ -408,23 +408,29 @@ export function getMonthSaints(month) {
   return CALENDAR_DATA[month] || [];
 }
 
-export function getFastingLabel(fasting) {
+export function getFastingLabel(fasting, lang) {
   const labels = {
-    'none': 'Без ограничења',
-    'fish': 'Риба',
-    'oil': 'Уље',
-    'strict': 'Строги пост',
+    sr: { 'none': 'Без ограничења', 'fish': 'Риба', 'oil': 'Уље', 'strict': 'Строги пост' },
+    'sr-cyrillic': { 'none': 'Без ограничења', 'fish': 'Риба', 'oil': 'Уље', 'strict': 'Строги пост' },
+    de: { 'none': 'Keine Einschränkung', 'fish': 'Fisch erlaubt', 'oil': 'Öl erlaubt', 'strict': 'Strenge Fastenzeit' },
+    it: { 'none': 'Nessuna restrizione', 'fish': 'Pesce permesso', 'oil': 'Olio permesso', 'strict': 'Digiuno severo' },
+    'sr-latin': { 'none': 'Bez ograničenja', 'fish': 'Riba', 'oil': 'Ulje', 'strict': 'Strogi post' }
   };
-  return labels[fasting] || fasting;
+  const langLabels = labels[lang] || labels['sr'];
+  return langLabels[fasting] || fasting;
 }
 
-export function getTypeLabel(type) {
+export function getTypeLabel(type, lang) {
   const labels = {
-    'great': 'Велики празник',
-    'major': 'Празник',
-    'regular': 'Обичан дан',
+    sr: { 'great': 'Велики празник', 'major': 'Празник', 'regular': 'Обичан дан' },
+    'sr-cyrillic': { 'great': 'Велики празник', 'major': 'Празник', 'regular': 'Обичан дан' },
+    de: { 'great': 'Großer Festtag', 'major': 'Festtag', 'regular': 'Gewöhnlicher Tag' },
+    it: { 'great': 'Grande festività', 'major': 'Festività', 'regular': 'Giorno ordinario' },
+    'sr-latin': { 'great': 'Veliki praznik', 'major': 'Praznik', 'regular': 'Običan dan' }
   };
-  return labels[type] || type;
+  const langLabels = labels[lang] || labels['sr'];
+  return langLabels[type] || type;
 }
 
 export default CALENDAR_DATA;
+

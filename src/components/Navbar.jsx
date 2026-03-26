@@ -51,7 +51,7 @@ const Navbar = () => {
   return (
     <nav className={`fixed w-full z-50 transition-all duration-500 ${
       isTransparent 
-        ? "bg-transparent" 
+        ? "bg-gradient-to-b from-black/70 via-black/40 to-transparent" 
         : "bg-white/95 backdrop-blur-md shadow-[0_4px_20px_rgba(0,0,0,0.06)]"
     }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

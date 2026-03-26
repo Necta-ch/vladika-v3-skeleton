@@ -1,7 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { motion } from "framer-motion";
 import { Calendar, Clock, MapPin, ChevronRight } from "lucide-react";
-;
 import { Link } from "react-router-dom";
 import LiturgyCalendar from "../components/LiturgyCalendar";
 

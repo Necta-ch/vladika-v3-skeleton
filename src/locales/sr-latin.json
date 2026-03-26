@@ -35,6 +35,10 @@
     "back": "Nazad na vesti",
     "gallery": "Foto galerija",
     "read_more": "Pročitajte više",
+    "photo": "foto",
+    "cat_liturgija": "Liturgija",
+    "cat_dogadjaj": "Događaj",
+    "cat_saopstenje": "Saopštenje",
     "see_on_fb": "Pogledajte originalnu objavu na Facebook stranici",
     "more_on_fb": "Za više vesti pratite nas na Facebook-u"
   },
@@ -49,7 +53,8 @@
     "slava": "Slava",
     "slava_desc": "Krsno ime",
     "no_info": "Nema informacija za ovaj dan.",
-    "month_list": "Januar,Februar,Mart,April,Maj,Jun,Jul,Avgust,Septembar,Oktobar,Novembar,Decembar"
+    "month_list": "Januar,Februar,Mart,April,Maj,Jun,Jul,Avgust,Septembar,Oktobar,Novembar,Decembar",
+    "month_saints": "Sve slave ovog meseca"
   },
   "admin": {
     "login_title": "Prijava",
